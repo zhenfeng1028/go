@@ -1,0 +1,19 @@
+{
+    "id": "service-id",
+    "summary": "Test Service",
+    "description": "A test service",
+    "maintainers": [
+        "Test1 Testerson &lt;test1.testerson@hootsuite.com&gt;",
+        "Test2 Testerson &lt;test2.testerson@hootsuite.com&gt;"
+    ],
+    "projectRepo": "https://github.com/hootsuite/test-service",
+    "projectHome": "https://home.com/hootsuite/test-service",
+    "logsLinks": [
+        "https://logging.com/hootsuite/test-service-1",
+        "https://logging.com/hootsuite/test-service-2"
+    ],
+    "statsLinks": [
+        "https://stats.com/hootsuite/test-service-1",
+        "https://stats.com/hootsuite/test-service-2"
+    ]
+}
