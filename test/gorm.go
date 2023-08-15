@@ -47,4 +47,12 @@ func main() {
 
 	// Delete - delete product
 	// db.Delete(&product)
+
+	db = db.Table("products").Where("price < 1011").Select("*")
+	subQuery := db.SubQuery()
+	fmt.Println(subQuery)
+
+	var cnt int64
+	db.New().Raw(`select count(1) from ? as a`, subQuery).Count(&cnt)
+	fmt.Println(cnt)
 }
