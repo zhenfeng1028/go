@@ -36,7 +36,7 @@ func main() {
 		buf := [512]byte{}
 		n, err := conn.Read(buf[:])
 		if err != nil {
-			fmt.Println("recv failed, err: ", err)
+			fmt.Println("recv failed, err:", err)
 			return
 		}
 		fmt.Println(string(buf[:n]))
