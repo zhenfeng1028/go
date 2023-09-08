@@ -5,10 +5,10 @@ import "net/http"
 func do() error {
 	res, err := http.Get("http://www.google.com")
 	// 应该先检查请求是否成功
-	defer res.Body.Close()
 	if err != nil {
 		return err
 	}
+	defer res.Body.Close()
 
 	// ..code...
 

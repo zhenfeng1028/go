@@ -16,9 +16,9 @@ func a() func() int {
 
 func main() {
 	c := a()
-	c()
-	c()
-	c()
+	c() //1
+	c() //2
+	c() //3
 
 	a() //不会输出i
 }
