@@ -8,7 +8,8 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-const connectStr = "wsl_root:@tcp(172.24.192.1:3306)/test?charset=utf8&parseTime=True&loc=Local"
+// 从wsl访问主机数据库
+const connectStrWSL = "wsl_root:@tcp(172.24.192.1:3306)/test?charset=utf8&parseTime=True&loc=Local"
 
 type Product struct {
 	Code  string `gorm:"column:code"`
@@ -18,7 +19,7 @@ type Product struct {
 
 func main() {
 
-	db, err := gorm.Open("mysql", connectStr)
+	db, err := gorm.Open("mysql", connectStrWSL)
 	if err != nil {
 		panic("failed to connect database")
 	}
