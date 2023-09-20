@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -22,11 +23,11 @@ func DownloadFile(url string, filename string) (ok bool) {
 	resp, err := http.Get(url)
 	HandleError(err, "http.get.url")
 	defer resp.Body.Close()
-	bytes, err := ioutil.ReadAll(resp.Body)
+	bytes, err := io.ReadAll(resp.Body)
 	HandleError(err, "resp.body")
 	filename = "/Users/lizhenfeng/Desktop/picture/crawler/wallpaper/" + filename
 	// 写出数据
-	err = ioutil.WriteFile(filename, bytes, 0666)
+	err = os.WriteFile(filename, bytes, 0666)
 	if err != nil {
 		return false
 	} else {
@@ -145,8 +146,8 @@ func GetPageStr(url string) (pageStr string) {
 	HandleError(err, "http.Get url")
 	defer resp.Body.Close()
 	// 2.读取页面内容
-	pageBytes, err := ioutil.ReadAll(resp.Body)
-	HandleError(err, "ioutil.ReadAll")
+	pageBytes, err := io.ReadAll(resp.Body)
+	HandleError(err, "io.ReadAll")
 	// 字节转字符串
 	pageStr = string(pageBytes)
 	return pageStr

@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math/rand"
 	"net"
 	"time"
@@ -43,7 +43,7 @@ func startClient() {
 	_, err = conn.Write([]byte("timestamp"))
 	checkError(err)
 
-	result, err := ioutil.ReadAll(conn)
+	result, err := io.ReadAll(conn)
 	checkError(err)
 	fmt.Println(string(result))
 

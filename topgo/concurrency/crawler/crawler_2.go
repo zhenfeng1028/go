@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"regexp"
 )
@@ -33,8 +33,8 @@ func GetPageStr(url string) (pageStr string) {
 	HandleError(err, "http.Get url")
 	defer resp.Body.Close()
 	// 2.读取页面内容
-	pageBytes, err := ioutil.ReadAll(resp.Body)
-	HandleError(err, "ioutil.ReadAll")
+	pageBytes, err := io.ReadAll(resp.Body)
+	HandleError(err, "io.ReadAll")
 	// 字节转字符串
 	pageStr = string(pageBytes)
 	return pageStr
@@ -81,7 +81,7 @@ func GetLink(url string) {
 	}
 }
 
-//爬手机号
+// 爬手机号
 func GetPhone(url string) {
 	pageStr := GetPageStr(url)
 	re := regexp.MustCompile(rePhone)

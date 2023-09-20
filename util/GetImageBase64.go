@@ -3,9 +3,9 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 func toBase64(b []byte) string {
@@ -14,7 +14,7 @@ func toBase64(b []byte) string {
 
 func main() {
 	// Read the entire file into a byte slice
-	bytes, err := ioutil.ReadFile("/Users/lizhenfeng/Desktop/picture/jdc_2142.jpg")
+	bytes, err := os.ReadFile("./../assets/snow.jpeg")
 	if err != nil {
 		log.Fatal(err)
 	}

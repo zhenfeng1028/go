@@ -2,19 +2,19 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
-func wr() {
-	err := ioutil.WriteFile("./yyy.txt", []byte("www.baidu.com"), 0666)
+func write() {
+	err := os.WriteFile("./yyy.txt", []byte("www.baidu.com"), 0666)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 }
 
-func re() {
-	content, err := ioutil.ReadFile("./yyy.txt")
+func read() {
+	content, err := os.ReadFile("./yyy.txt")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -23,6 +23,6 @@ func re() {
 }
 
 func main() {
-	wr()
-	re()
+	write()
+	read()
 }

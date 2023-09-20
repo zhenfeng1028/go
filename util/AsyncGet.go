@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 )
@@ -49,7 +49,7 @@ func main() {
 	for _, httpResp := range httpResps {
 		defer httpResp.Resp.Body.Close()
 
-		data, err := ioutil.ReadAll(httpResp.Resp.Body)
+		data, err := io.ReadAll(httpResp.Resp.Body)
 		if err != nil {
 			fmt.Println("err: ", err)
 		}

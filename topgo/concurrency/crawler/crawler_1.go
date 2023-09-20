@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"regexp"
 )
@@ -20,8 +20,8 @@ func GetEmail() {
 	HandleError(err, "http.Get url")
 	defer resp.Body.Close()
 	// 2.读取页面内容
-	pageBytes, err := ioutil.ReadAll(resp.Body)
-	HandleError(err, "ioutil.ReadAll")
+	pageBytes, err := io.ReadAll(resp.Body)
+	HandleError(err, "io.ReadAll")
 	// 字节转字符串
 	pageStr := string(pageBytes)
 	// 3.过滤数据，过滤qq邮箱

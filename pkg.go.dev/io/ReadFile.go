@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 func main() {
-	content, err := ioutil.ReadFile("hello.txt")
+	content, err := os.ReadFile("hello.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

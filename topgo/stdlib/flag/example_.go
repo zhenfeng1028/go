@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 
 	fmt.Println(nameFile)
 
-	nameData, err := ioutil.ReadFile(nameFile)
+	nameData, err := os.ReadFile(nameFile)
 	if err != nil {
 		fmt.Printf("config file read err: %s ", err)
 	}

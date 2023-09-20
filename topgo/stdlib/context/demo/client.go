@@ -4,7 +4,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"sync"
 	"time"
@@ -58,7 +58,7 @@ func doCall(ctx context.Context) {
 		}
 		fmt.Println("call server api success")
 		defer result.resp.Body.Close()
-		data, _ := ioutil.ReadAll(result.resp.Body)
+		data, _ := io.ReadAll(result.resp.Body)
 		fmt.Printf("resp:%v\n", string(data))
 	}
 }
