@@ -12,3 +12,5 @@ func main() {
 	fmt.Println(re.ReplaceAllString("-ab-axxb-", "$1W"))
 	fmt.Println(re.ReplaceAllString("-ab-axxb-", "${1}W"))
 }
+
+// https://stackoverflow.com/questions/34673039/go-replaceallstring

@@ -51,7 +51,6 @@ func re() {
 		}
 		fmt.Println(string(line))
 	}
-
 }
 
 func main() {

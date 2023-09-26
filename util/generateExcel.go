@@ -26,7 +26,7 @@ func main() {
 
 	err := GenerateExcelByStruct(interfaceSlice, "test.xlsx")
 	if err != nil {
-		log.Errorf("GenerateExcelByStruct err:%s\n", err)
+		log.Errorf("GenerateExcelByStruct err: %s\n", err)
 	}
 }
 
@@ -58,7 +58,7 @@ func GenerateExcelByStruct(r []interface{}, filename string) error {
 
 	excel, err := NewExcel()
 	if err != nil {
-		log.Errorf("NewExcel err:%s\n", err)
+		log.Errorf("NewExcel err: %s\n", err)
 		return err
 	}
 
@@ -66,11 +66,11 @@ func GenerateExcelByStruct(r []interface{}, filename string) error {
 		excel.Write(xl)
 	}
 
-	excelFilePath := "/home/lizhenfeng/github/go/" + filename
+	excelFilePath := "./../assets/" + filename
 
 	err = excel.Save(excelFilePath)
 	if err != nil {
-		log.Errorf("save file err:%s\n", err)
+		log.Errorf("save file err: %s\n", err)
 		return err
 	}
 
