@@ -21,7 +21,7 @@ func test01(base int) (func(int) int, func(int) int) {
 
 func main() {
 	f1, f2 := test01(10)
-	// base一直是没有消
+	// 此时base是10
 	fmt.Println(f1(1), f2(2))
 	// 此时base是9
 	fmt.Println(f1(3), f2(4))

@@ -1,18 +1,19 @@
 package main
 
 import "fmt"
+
 const (
-    i=1<<iota
-    j=3<<iota
-    k
-    l
+	i = 1 << iota
+	j = 3 << iota
+	k
+	l
 )
 
 func main() {
-    fmt.Println("i=",i)
-    fmt.Println("j=",j)
-    fmt.Println("k=",k)
-    fmt.Println("l=",l)
+	fmt.Println("i=", i)
+	fmt.Println("j=", j)
+	fmt.Println("k=", k)
+	fmt.Println("l=", l)
 }
 
 // iota 表示从 0 开始自动加 1，所以 i=1<<0, j=3<<1（<< 表示左移的意思），即：i=1, j=6，这没问题，
