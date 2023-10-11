@@ -9,7 +9,7 @@ func main() {
 	var d int = 5
 	var e int
 
-	e = (a + b) * c / d // ( 30 * 15 ) / 5
+	e = (a + b) * c / d // (30 * 15) / 5
 	fmt.Printf("(a + b) * c / d 的值为 : %d\n", e)
 
 	e = ((a + b) * c) / d // (30 * 15 ) / 5

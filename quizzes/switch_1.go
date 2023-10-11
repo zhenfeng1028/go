@@ -5,7 +5,7 @@ func f() bool {
 }
 
 func main() {
-	switch f(); //
+	switch f(); // this semicolon can be omitted
 	{
 	case true:
 		println(1)
