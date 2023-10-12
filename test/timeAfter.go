@@ -55,7 +55,7 @@ func test() {
 			runtime.GC()
 			runtime.ReadMemStats(&ms)
 			fmt.Printf("receive: %s, now have %d goroutines, %d bytes allocated, %d heap object\n", res, runtime.NumGoroutine(), ms.Alloc, ms.HeapObjects)
-		case <-time.After(2 * time.Second): // 计时器出发后，GC会回收这些Timer，并不会造成“孤儿内存”（正确的做法是在for循环外进行初始化，否则会造成内存泄露）
+		case <-time.After(2 * time.Second): // 计时器触发后，GC会回收这些Timer，并不会造成“孤儿内存”（正确的做法是在for循环外进行初始化，否则会造成内存泄露）
 			runtime.GC()
 			runtime.ReadMemStats(&ms)
 			fmt.Printf("after, now have %d goroutines, %d bytes allocated, %d heap object\n", runtime.NumGoroutine(), ms.Alloc, ms.HeapObjects)
