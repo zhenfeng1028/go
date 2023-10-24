@@ -33,5 +33,4 @@ func main() {
 	fmt.Println(people)
 	sort.Sort(ByAge(people))
 	fmt.Println(people)
-	
 }
