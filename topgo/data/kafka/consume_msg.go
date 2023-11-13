@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 )
 
 // kafka consumer

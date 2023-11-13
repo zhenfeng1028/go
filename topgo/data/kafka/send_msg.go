@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 )
 
 // 基于sarama第三方库开发的kafka client

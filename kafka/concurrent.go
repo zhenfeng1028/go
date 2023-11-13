@@ -9,7 +9,7 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	"github.com/qiniu/x/log"
 )
 
@@ -201,7 +201,7 @@ func (consumer *Consumer) ConsumeClaim(session sarama.ConsumerGroupSession, clai
 	// NOTE:
 	// Do not move the code below to a goroutine.
 	// The `ConsumeClaim` itself is called within a goroutine, see:
-	// https://github.com/Shopify/sarama/blob/main/consumer_group.go#L27-L29
+	// https://github.com/IBM/sarama/blob/main/consumer_group.go#L27-L29
 	ctx := context.Background()
 	for message := range claim.Messages() {
 		log.Infof("got message: timestamp = %v, topic = %s, partition = %d, offset = %d, handler = %d", message.Timestamp, message.Topic, message.Partition, message.Offset, consumer.number)

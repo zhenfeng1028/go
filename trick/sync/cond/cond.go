@@ -39,5 +39,3 @@ func main() {
 // 1. done 即多个 Goroutine 阻塞等待的条件。
 // 2. read() 调用 Wait() 等待通知，直到 done 为 true。
 // 3. write() 发送数据，发送完成后，将 done 置为 true，调用 Broadcast() 通知所有等待的协程。
-// 4. write() 中的暂停了 1s，一方面是模拟耗时，另一方面是确保前面的 3 个 read 协程都执行到 Wait()，
-// 处于等待状态。main 函数最后暂停了 3s，确保所有操作执行完毕。
