@@ -13,8 +13,8 @@ const connectStrWSL = "wsl_root:@tcp(172.24.192.1:3306)/test?charset=utf8&parseT
 
 type Product struct {
 	Code  string `gorm:"column:code"`
-	Price uint   `gorm:"default:1000"`
-	Name  string `gorm:"column:nAme"`
+	Price uint   `gorm:"column:price"`
+	Name  string `gorm:"column:name"`
 }
 
 func main() {
