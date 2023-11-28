@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	ExecCmd("ll")
+	ExecCmd("ls -l")
 }
 
 func ExecCmd(command string) {
@@ -31,5 +31,5 @@ func ExecCmd(command string) {
 		fmt.Println("cmd.Wait() error:", err.Error())
 		return
 	}
-	fmt.Printf("stdout:\n %s", bytes)
+	fmt.Printf("stdout:\n%s", bytes)
 }

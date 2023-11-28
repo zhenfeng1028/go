@@ -17,7 +17,6 @@ type Person struct {
 }
 
 func main() {
-
 	list := []Person{{"aaa", 28, "male"}, {"bbb", 26, "female"}}
 
 	var interfaceSlice = make([]interface{}, len(list))
@@ -25,13 +24,14 @@ func main() {
 		interfaceSlice[k] = v
 	}
 
-	err := GenerateExcel(interfaceSlice, "person.xlsx")
+	requiredFields := []interface{}{"姓名", "年龄"}
+	err := GenerateExcelByCustom(interfaceSlice, "person.xlsx", requiredFields)
 	if err != nil {
-		log.Errorf("GenerateExcel err: %s\n", err)
+		log.Errorf("GenerateExcelByCustom err: %s\n", err)
 	}
 }
 
-func GenerateExcel(r []interface{}, filename string) error {
+func GenerateExcelByCustom(r []interface{}, filename string, requiredFields []interface{}) error {
 	var xls [][]interface{}
 	xls = make([][]interface{}, 0)
 
@@ -39,18 +39,16 @@ func GenerateExcel(r []interface{}, filename string) error {
 		return errors.New("list is empty")
 	}
 
-	titles, err := getExcelTitle(r[0])
+	titles, err := getExcelTitle(r[0], requiredFields)
 	if err != nil {
 		return err
 	}
 	var interfaceSlice = make([]interface{}, len(titles))
-	for i, d := range titles {
-		interfaceSlice[i] = d
-	}
+	copy(interfaceSlice, titles)
 	xls = append(xls, interfaceSlice)
 
 	for i := 0; i < len(r); i++ {
-		vs, err := getFieldByStruct(r[i])
+		vs, err := getFieldByStruct(r[i], requiredFields)
 		if err != nil {
 			return err
 		}
@@ -101,7 +99,12 @@ func (e *Excel) Save(path string) error {
 	return nil
 }
 
-func getExcelTitle(obj interface{}) ([]string, error) {
+type ExcelField struct {
+	TName  string
+	TValue interface{}
+}
+
+func getExcelTitle(obj interface{}, requiredFields []interface{}) ([]interface{}, error) {
 	v := reflect.ValueOf(obj)
 	if !v.IsValid() {
 		return nil, errors.New("no struct")
@@ -113,27 +116,28 @@ func getExcelTitle(obj interface{}) ([]string, error) {
 		t = v.Type()
 	}
 
-	ret := make([]string, 0)
-
+	prepare := make([]interface{}, 0)
 	for i := 0; i < v.NumField(); i++ {
-		TExcel := t.Field(i).Tag.Get("TExcel")
-		if len(TExcel) > 0 {
-			ret = append(ret, TExcel)
+		TName := t.Field(i).Tag.Get("TExcel")
+		if len(TName) > 0 {
+			prepare = append(prepare, ExcelField{TName, TName})
 		}
 	}
+
+	ret := FilterFields(prepare, requiredFields)
 	return ret, nil
 }
 
-func getFieldByStruct(structName interface{}) ([]interface{}, error) {
+func getFieldByStruct(structName interface{}, requiredFields []interface{}) ([]interface{}, error) {
 	v := reflect.ValueOf(structName)
 	if !v.IsValid() {
 		return nil, errors.New("no struct")
 	}
 
-	ret := make([]interface{}, 0)
-
+	prepare := make([]interface{}, 0)
 	for i := 0; i < v.NumField(); i++ {
 		TValue := ""
+		TName := v.Type().Field(i).Tag.Get("TExcel")
 		value := v.Field(i)
 		kind := value.Kind()
 		switch kind {
@@ -142,8 +146,10 @@ func getFieldByStruct(structName interface{}) ([]interface{}, error) {
 		case reflect.Int:
 			TValue = strconv.FormatInt(value.Int(), 10)
 		}
-		ret = append(ret, TValue)
+		prepare = append(prepare, ExcelField{TName, TValue})
 	}
+
+	ret := FilterFields(prepare, requiredFields)
 	return ret, nil
 }
 
@@ -164,4 +170,29 @@ func NewExcel() (*Excel, error) {
 	excel.Sheet = sheet
 
 	return excel, nil
+}
+
+func FilterFields(fields []interface{}, requiredFields []interface{}) []interface{} {
+	tmp := make([]interface{}, 0)
+	if len(fields) > 0 && len(requiredFields) > 0 {
+		locFields := make([]ExcelField, 0)
+		for _, v := range fields {
+			locFields = append(locFields, v.(ExcelField))
+		}
+		locRequiredFields := make([]string, 0)
+		for _, v := range requiredFields {
+			locRequiredFields = append(locRequiredFields, v.(string))
+		}
+
+		for _, r := range locFields {
+			for _, n := range locRequiredFields {
+				if r.TName == n {
+					tmp = append(tmp, r.TValue)
+					break
+				}
+			}
+		}
+	}
+
+	return tmp
 }
