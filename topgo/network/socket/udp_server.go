@@ -25,7 +25,7 @@ func main() {
 			fmt.Println("read udp failed, err:", err)
 			continue
 		}
-		fmt.Printf("data:%v addr:%v count:%v\n", string(data[:n]), addr, n)
+		fmt.Printf("data: %v addr: %v count: %v\n", string(data[:n]), addr, n)
 
 		_, err = listen.WriteToUDP(data[:n], addr) // 发送数据
 		if err != nil {

@@ -20,5 +20,5 @@ func main() {
 	njPointer := (*int64)(unsafe.Pointer(uintptr(nPointer) + unsafe.Offsetof(n.j)))
 	*njPointer = 2
 
-	fmt.Printf("n.i: %s, n.j: %d", n.i, n.j)
+	fmt.Printf("n.i: %s, n.j: %d\n", n.i, n.j)
 }
