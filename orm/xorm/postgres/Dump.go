@@ -6,19 +6,14 @@ import (
 
 	_ "github.com/lib/pq"
 	"xorm.io/xorm"
+	"xorm.io/xorm/schemas"
 )
 
-type Unit struct {
-	UnitId   int     `json:"unit_id" xorm:"pk comment('单元编号') VARCHAR(255)"`
-	UnitName string  `json:"unit_name" xorm:"not null comment('单元名称') VARCHAR(255)"`
-	Distance float32 `json:"distance" xorm:"default 0 comment('距离') FLOAT"`
-}
-
 const (
-	host     = "100.100.142.132"
-	port     = 25432
+	host     = "127.0.0.1"
+	port     = 5432
 	user     = "postgres"
-	password = "smai123"
+	password = "lzf123"
 	dbname   = "test"
 )
 
@@ -37,9 +32,8 @@ func main() {
 	session := engine.NewSession()
 	defer session.Close()
 
-	err = engine.Sync2(
-		new(Unit))
+	err = engine.DumpAllToFile("structure.txt", schemas.POSTGRES)
 	if err != nil {
-		log.Fatal("sync database err: ", err)
+		log.Fatal("dump file err: ", err)
 	}
 }

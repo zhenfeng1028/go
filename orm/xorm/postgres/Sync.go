@@ -6,14 +6,20 @@ import (
 
 	_ "github.com/lib/pq"
 	"xorm.io/xorm"
-	"xorm.io/xorm/schemas"
 )
 
+type Camera struct {
+	Id       int    `json:"id" xorm:"not null pk autoincr INT(11)"`
+	CameraId string `json:"camera_id" xorm:"unique VARCHAR(255)"`
+	Name     string `json:"name" xorm:"comment('摄像头名称') VARCHAR(255)"`
+	Location string `json:"location" xorm:"comment('位置') VARCHAR(255)"`
+}
+
 const (
-	host     = "100.100.142.132"
-	port     = 25432
+	host     = "127.0.0.1"
+	port     = 5432
 	user     = "postgres"
-	password = "smai123"
+	password = "lzf123"
 	dbname   = "test"
 )
 
@@ -32,8 +38,8 @@ func main() {
 	session := engine.NewSession()
 	defer session.Close()
 
-	err = engine.DumpAllToFile("structure.txt", schemas.POSTGRES)
+	err = engine.Sync2(new(Camera))
 	if err != nil {
-		log.Fatal("dump file err: ", err)
+		log.Fatal("sync database err: ", err)
 	}
 }

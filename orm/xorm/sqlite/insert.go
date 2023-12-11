@@ -21,17 +21,17 @@ func main() {
 		err    error
 	)
 
-	engine, err = xorm.NewEngine("sqlite3", "./data.db3")
+	engine, err = xorm.NewEngine("sqlite3", "./data.db")
 	if err != nil {
 		log.Fatal("init engine err: ", err)
 	}
 
-	// err = engine.Sync2(
-	// 	new(User),
-	// )
-	// if err != nil {
-	// 	log.Fatal("sync database err: ", err)
-	// }
+	err = engine.Sync2(
+		new(User),
+	)
+	if err != nil {
+		log.Fatal("sync database err: ", err)
+	}
 
 	session := engine.NewSession()
 	defer session.Close()

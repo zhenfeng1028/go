@@ -40,7 +40,7 @@ type KafkaConsumer struct {
 
 func main() {
 	kcc := KafkaClientConfig{
-		Brokers: []string{"100.100.142.91:9092"},
+		Brokers: []string{"127.0.0.1:9092"},
 	}
 
 	cc := &ConsumerConfig{

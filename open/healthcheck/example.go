@@ -12,7 +12,7 @@ import (
 func main() {
 	var engine *xorm.Engine
 	var err error
-	engine, err = xorm.NewEngine("mysql", "root:smai123@(100.100.142.131:4000)/lzf?charset=utf8&parseTime=true&loc=Local") // lzf是数据库实例名称
+	engine, err = xorm.NewEngine("mysql", "root:lzf123@(127.0.0.1:4000)/lzf?charset=utf8&parseTime=true&loc=Local") // lzf是数据库实例名称
 	if err != nil {
 		log.Fatal("init engine failed:", err)
 	}

@@ -43,7 +43,7 @@ type Score struct {
 func main() {
 	var engine *xorm.Engine
 	var err error
-	engine, err = xorm.NewEngine("mysql", "root:smai123@(100.100.142.15:4000)/lzf?charset=utf8") // lzf是数据库实例名称
+	engine, err = xorm.NewEngine("mysql", "root:lzf123@(127.0.0.1:4000)/lzf?charset=utf8") // lzf是数据库实例名称
 	if err != nil {
 		log.Fatal("init engine err: ", err)
 	}
