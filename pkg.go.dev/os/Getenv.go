@@ -10,5 +10,4 @@ func main() {
 	os.Setenv("BURROW", "/usr/gopher")
 
 	fmt.Printf("%s lives in %s.\n", os.Getenv("NAME"), os.Getenv("BURROW"))
-
 }

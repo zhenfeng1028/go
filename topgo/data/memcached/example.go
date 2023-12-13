@@ -18,66 +18,72 @@ func main() {
 	}
 
 	// set key-value
-	mc.Set(&memcache.Item{Key: "foo", Value: []byte("my value")})
+	err := mc.Set(&memcache.Item{Key: "foo", Value: []byte("my value")})
+	if err != nil {
+		fmt.Println("Set failed:", err.Error())
+	}
 
 	// get key's value
-	it, _ := mc.Get("foo")
-	if string(it.Key) == "foo" {
-		fmt.Println("value is ", string(it.Value))
-	} else {
-		fmt.Println("Get failed")
-	}
-	/// add a new key-value
-	mc.Add(&memcache.Item{Key: "foo", Value: []byte("bluegogo")})
 	it, err := mc.Get("foo")
 	if err != nil {
-		fmt.Println("Add failed")
+		fmt.Println("Get failed:", err.Error())
 	} else {
-		if string(it.Key) == "foo" {
-			fmt.Println("Add value is ", string(it.Value))
-		} else {
-			fmt.Println("Get failed")
-		}
+		fmt.Println("value is", string(it.Value))
 	}
-	// replace a key's value
-	mc.Replace(&memcache.Item{Key: "foo", Value: []byte("mobike")})
+
+	// add a new key-value
+	err = mc.Add(&memcache.Item{Key: "foo", Value: []byte("bluegogo")})
+	if err != nil {
+		fmt.Println("Add failed:", err.Error())
+	}
 	it, err = mc.Get("foo")
 	if err != nil {
-		fmt.Println("Replace failed")
+		fmt.Println("Get failed:", err.Error())
 	} else {
-		if string(it.Key) == "foo" {
-			fmt.Println("Replace value is ", string(it.Value))
-		} else {
-			fmt.Println("Replace failed")
-		}
+		fmt.Println("value is", string(it.Value))
 	}
+
+	// replace a key's value
+	err = mc.Replace(&memcache.Item{Key: "foo", Value: []byte("mobike")})
+	if err != nil {
+		fmt.Println("Replace failed:", err.Error())
+	}
+	it, err = mc.Get("foo")
+	if err != nil {
+		fmt.Println("Get failed:", err.Error())
+	} else {
+		fmt.Println("Replace value is", string(it.Value))
+	}
+
 	// delete an exist key
 	err = mc.Delete("foo")
 	if err != nil {
 		fmt.Println("Delete failed:", err.Error())
 	}
+
 	// incrby
 	err = mc.Set(&memcache.Item{Key: "aaa", Value: []byte("1")})
 	if err != nil {
-		fmt.Println("Set failed :", err.Error())
+		fmt.Println("Set failed:", err.Error())
 	}
-	it, err = mc.Get("foo")
+	it, err = mc.Get("aaa")
 	if err != nil {
-		fmt.Println("Get failed ", err.Error())
+		fmt.Println("Get failed:", err.Error())
 	} else {
-		fmt.Println("src value is:", it.Value)
+		fmt.Println("src value is", string(it.Value))
 	}
 	value, err := mc.Increment("aaa", 7)
 	if err != nil {
-		fmt.Println("Increment failed")
+		fmt.Println("Increment failed:", err.Error())
 	} else {
-		fmt.Println("after increment the value is :", value)
+		fmt.Println("after increment the value is", value)
 	}
+
 	// decrby
 	value, err = mc.Decrement("aaa", 4)
 	if err != nil {
-		fmt.Println("Decrement failed", err.Error())
+		fmt.Println("Decrement failed:", err.Error())
 	} else {
-		fmt.Println("after decrement the value is ", value)
+		fmt.Println("after decrement the value is", value)
 	}
 }

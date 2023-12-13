@@ -35,5 +35,4 @@ func main() {
 	if s, err := strconv.ParseFloat("+0", 32); err == nil {
 		fmt.Printf("%T, %v\n", s, s)
 	}
-
 }

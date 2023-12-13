@@ -13,10 +13,10 @@ var str = `
  	}
 }`
 
-var globalConfig = make(map[string]interface{})
+var configMap = make(map[string]interface{})
 
 func main() {
-	err := json.Unmarshal([]byte(str), &globalConfig)
+	err := json.Unmarshal([]byte(str), &configMap)
 	if err != nil {
 		panic(err)
 	}
@@ -29,7 +29,7 @@ func main() {
 }
 
 func GetString(keys ...string) (string, error) {
-	result, err := Get(globalConfig, keys...)
+	result, err := Get(configMap, keys...)
 	if err != nil {
 		return "", err
 	}
@@ -42,7 +42,7 @@ func GetString(keys ...string) (string, error) {
 }
 
 func GetInt(keys ...string) (int, error) {
-	result, err := Get(globalConfig, keys...)
+	result, err := Get(configMap, keys...)
 	if err != nil {
 		return -1, err
 	}

@@ -13,5 +13,4 @@ func main() {
 
 	s16 := strconv.FormatInt(v, 16)
 	fmt.Printf("%T, %v\n", s16, s16)
-
 }

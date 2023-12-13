@@ -6,8 +6,10 @@ import (
 )
 
 func main() {
-	re := regexp.MustCompile(`(gopher){2}`)
-	fmt.Println(re.MatchString("gopher"))
-	fmt.Println(re.MatchString("gophergopher"))
-	fmt.Println(re.MatchString("gophergophergopher"))
+	matched, err := regexp.MatchString(`foo.*`, "seafood")
+	fmt.Println(matched, err)
+	matched, err = regexp.MatchString(`bar.*`, "seafood")
+	fmt.Println(matched, err)
+	matched, err = regexp.MatchString(`a(b`, "seafood")
+	fmt.Println(matched, err)
 }

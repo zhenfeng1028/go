@@ -21,5 +21,4 @@ func main() {
 	show("SOME_KEY")
 	show("EMPTY_KEY")
 	show("MISSING_KEY")
-
 }
