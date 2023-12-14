@@ -24,25 +24,24 @@ func checkError(err error) {
 	}
 }
 
-func startServer(port string) {
-	tcpAddr, err := net.ResolveTCPAddr("tcp4", port)
-	fmt.Println(tcpAddr)
+func startServer(addr string) {
+	tcpAddr, err := net.ResolveTCPAddr("tcp4", addr)
 	checkError(err)
 
 	listener, err := net.ListenTCP("tcp", tcpAddr)
 	checkError(err)
 
 	// 注册zk节点q
-	// 链接zk
+	// 连接zk
 	conn, err := GetConnect()
 	if err != nil {
-		fmt.Printf(" connect zk error: %s ", err)
+		fmt.Println("connect zk error,", err)
 	}
 	defer conn.Close()
 	// zk节点注册
-	err = RegistServer(conn, port)
+	err = RegistServer(conn, addr)
 	if err != nil {
-		fmt.Printf(" regist node error: %s ", err)
+		fmt.Println("regist node error,", err)
 	}
 
 	for {
@@ -51,27 +50,26 @@ func startServer(port string) {
 			fmt.Fprintf(os.Stderr, "Error: %s", err)
 			continue
 		}
-		go handleCient(conn, port)
+		go handleCient(conn, addr)
 	}
 }
 
-func handleCient(conn net.Conn, port string) {
+func handleCient(conn net.Conn, addr string) {
 	defer conn.Close()
 
 	daytime := time.Now().String()
-	conn.Write([]byte(port + ": " + daytime))
+	conn.Write([]byte(addr + ", " + daytime))
 }
+
 func GetConnect() (conn *zk.Conn, err error) {
 	zkList := []string{"localhost:2181"}
 	conn, _, err = zk.Connect(zkList, 10*time.Second)
-	if err != nil {
-		fmt.Println(err)
-	}
+	checkError(err)
 	return
 }
 
-func RegistServer(conn *zk.Conn, host string) (err error) {
-	_, err = conn.Create("/go_servers/"+host, nil, zk.FlagEphemeral, zk.WorldACL(zk.PermAll))
+func RegistServer(conn *zk.Conn, addr string) (err error) {
+	_, err = conn.Create("/go_servers/"+addr, nil, zk.FlagEphemeral, zk.WorldACL(zk.PermAll))
 	return
 }
 

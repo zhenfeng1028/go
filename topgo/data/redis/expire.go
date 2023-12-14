@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/garyburd/redigo/redis"
+	"github.com/gomodule/redigo/redis"
 )
 
 func main() {
@@ -12,11 +12,11 @@ func main() {
 		fmt.Println("conn redis failed,", err)
 		return
 	}
-	
+
 	defer c.Close()
 
 	// 10秒后过期
-	_, err = c.Do("expire", "abc", 10)
+	_, err = c.Do("EXPIRE", "abc", 10)
 	if err != nil {
 		fmt.Println(err)
 		return

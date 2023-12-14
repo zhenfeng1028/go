@@ -1,8 +1,5 @@
 package main
 
-/**
-客户端doc地址：github.com/samuel/go-zookeeper/zk
-**/
 import (
 	"fmt"
 	"time"

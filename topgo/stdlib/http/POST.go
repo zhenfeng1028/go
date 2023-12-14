@@ -10,8 +10,7 @@ import (
 // net/http post demo
 
 func main() {
-	url := "http://127.0.0.1:9090/post"
-	// 表单数据
+	url := "http://127.0.0.1:9090/"
 	contentType := "application/json"
 	data := `{"name":"lzf","age":18}`
 	resp, err := http.Post(url, contentType, strings.NewReader(data))
@@ -22,7 +21,7 @@ func main() {
 	defer resp.Body.Close()
 	b, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Printf("get resp failed,err: %v\n", err)
+		fmt.Printf("get resp failed, err: %v\n", err)
 		return
 	}
 	fmt.Println(string(b))

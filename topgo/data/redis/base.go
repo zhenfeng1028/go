@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/garyburd/redigo/redis"
+	"github.com/gomodule/redigo/redis"
 )
 
 func main() {
@@ -14,13 +14,13 @@ func main() {
 	}
 
 	defer c.Close()
-	_, err = c.Do("Set", "abc", 100)
+	_, err = c.Do("SET", "abc", 100)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	r, err := redis.Int(c.Do("Get", "abc"))
+	r, err := redis.Int(c.Do("GET", "abc"))
 	if err != nil {
 		fmt.Println("get abc failed,", err)
 		return
