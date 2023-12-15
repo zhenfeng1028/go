@@ -1,4 +1,3 @@
-// 通过Context我们也可以传递一些必须的元数据，这些数据会附加在Context上以供使用。
 package main
 
 import (
@@ -6,6 +5,8 @@ import (
 	"fmt"
 	"time"
 )
+
+// 通过Context我们也可以传递一些必须的元数据，这些数据会附加在Context上以供使用。
 
 var key string = "name"
 

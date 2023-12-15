@@ -1,7 +1,3 @@
-// 上面说的这种场景是存在的，比如一个网络请求Request，每个Request都需要开启一个goroutine做一些事情，
-// 这些goroutine又可能会开启其他的goroutine。
-// 所以我们需要一种可以跟踪goroutine的方案，才可以达到控制他们的目的，
-// 这就是Go语言为我们提供的Context，称之为上下文非常贴切，它就是goroutine的上下文。
 package main
 
 import (
@@ -9,6 +5,11 @@ import (
 	"fmt"
 	"time"
 )
+
+// 上面说的这种场景是存在的，比如一个网络请求Request，每个Request都需要开启一个goroutine做一些事情，
+// 这些goroutine又可能会开启其他的goroutine。
+// 所以我们需要一种可以跟踪goroutine的方案，才可以达到控制他们的目的，
+// 这就是Go语言为我们提供的Context，称之为上下文非常贴切，它就是goroutine的上下文。
 
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())

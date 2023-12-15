@@ -4,7 +4,7 @@
 
 ## why
 1. 如何优雅地结束子 goroutine ？
-2. 全局变量的方式
+2. 全局变量的方式
 3. 管道的方式
 4. 官方的方案（context）
 5. 当子 goroutine 又开启另外一个 goroutine 时，只需要将 ctx 传入即可

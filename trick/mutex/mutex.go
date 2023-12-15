@@ -5,19 +5,21 @@ import (
 	"sync"
 )
 
-var x int64
-var wg sync.WaitGroup
-
-// var lock sync.Mutex
+var (
+	x    int64
+	wg   sync.WaitGroup
+	lock sync.Mutex
+)
 
 func add() {
-	for i := 0; i < 5000; i++ {
-		// lock.Lock()
+	for i := 0; i < 500000; i++ {
+		lock.Lock()
 		x = x + 1
-		// lock.Unlock()
+		lock.Unlock()
 	}
 	wg.Done()
 }
+
 func main() {
 	wg.Add(2)
 	go add()

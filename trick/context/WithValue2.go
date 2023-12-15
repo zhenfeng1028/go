@@ -9,11 +9,11 @@ import (
 func worker(cancelCtx context.Context, ch chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	fmt.Println(fmt.Sprintf("context value: %v", cancelCtx.Value("key1")))
+	fmt.Println("context value:", cancelCtx.Value("key1"))
 	for {
 		select {
 		case val := <-ch:
-			fmt.Println(fmt.Sprintf("read from ch value: %d", val))
+			fmt.Println("read from ch value:", val)
 		case <-cancelCtx.Done():
 			fmt.Println("worker is cancelled")
 			return
