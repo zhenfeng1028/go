@@ -1,4 +1,3 @@
-// context_timeout/client/main.go
 package main
 
 import (
@@ -38,7 +37,6 @@ func doCall(ctx context.Context) {
 	defer wg.Wait()
 	go func() {
 		resp, err := client.Do(req)
-		fmt.Printf("client.do resp: %v, err: %v\n", resp, err)
 		rd := &respData{
 			resp: resp,
 			err:  err,
@@ -49,7 +47,6 @@ func doCall(ctx context.Context) {
 
 	select {
 	case <-ctx.Done():
-		// transport.CancelRequest(req)
 		fmt.Println("call api timeout")
 	case result := <-respChan:
 		if result.err != nil {
@@ -59,7 +56,7 @@ func doCall(ctx context.Context) {
 		fmt.Println("call server api success")
 		defer result.resp.Body.Close()
 		data, _ := io.ReadAll(result.resp.Body)
-		fmt.Printf("resp:%v\n", string(data))
+		fmt.Printf("resp: %v\n", string(data))
 	}
 }
 

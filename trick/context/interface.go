@@ -25,21 +25,19 @@ type Context interface {
 // 以上四个方法中常用的就是Done了，如果Context取消的时候，我们就可以得到一个关闭的chan，
 // 关闭的chan是可以读取的，所以只要可以读取的时候，就意味着收到Context取消的信号了，以下是这个方法的经典用法。
 
-/*
-func Stream(ctx context.Context, out chan<- Value) error {
-	for {
-		v, err := DoSomething(ctx)
-		if err != nil {
-			return err
-		}
-		select {
-		case <-ctx.Done():
-			return ctx.Err()
-		case out <- v:
-		}
-	}
-}
-*/
+// func Stream(ctx context.Context, out chan<- Value) error {
+// 	for {
+// 		v, err := DoSomething(ctx)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		select {
+// 		case <-ctx.Done():
+// 			return ctx.Err()
+// 		case out <- v:
+// 		}
+// 	}
+// }
 
 // Context接口并不需要我们实现，Go内置已经帮我们实现了2个，
 // 我们代码中最开始都是以这两个内置的作为最顶层的parent context，衍生出更多的子Context。
@@ -101,4 +99,4 @@ func WithValue(parent Context, key, val interface{}) Context
 // 大家可能留意到，前三个函数都返回一个取消函数CancelFunc，这是一个函数类型，它的定义非常简单。
 type CancelFunc func()
 
-// 这就是取消函数的类型，该函数可以取消一个Context，以及这个节点Context下所有的所有的Context，不管有多少层级。
+// 这就是取消函数的类型，该函数可以取消一个Context，以及这个节点Context下所有的子Context，不管有多少层级。

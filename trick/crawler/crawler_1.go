@@ -9,26 +9,24 @@ import (
 
 // 这个只是一个简单的版本只是获取QQ邮箱并且没有进行封装操作，另外爬出来的数据也没有进行去重操作
 var (
-	// \d是数字
-	reQQEmail = `(\d+)@qq.com`
+	reQQEmail = `(\d+)@qq\.com`
 )
 
 // 爬邮箱
 func GetEmail() {
 	// 1.去网站拿数据
-	resp, err := http.Get("https://tieba.baidu.com/p/6051076813?red_tag=1573533731")
+	resp, err := http.Get("https://tieba.baidu.com/p/8299418946")
 	HandleError(err, "http.Get url")
 	defer resp.Body.Close()
 	// 2.读取页面内容
 	pageBytes, err := io.ReadAll(resp.Body)
 	HandleError(err, "io.ReadAll")
 	// 字节转字符串
-	// pageStr := string(pageBytes)
-	// 3.过滤数据，过滤qq邮箱
+	pageStr := string(pageBytes)
+	// 3.过滤数据，筛出qq邮箱
 	re := regexp.MustCompile(reQQEmail)
 	// -1代表取全部
-	results := re.FindAllSubmatch(pageBytes, -1)
-	fmt.Println(results)
+	results := re.FindAllStringSubmatch(pageStr, -1)
 
 	// 遍历结果
 	for _, result := range results {

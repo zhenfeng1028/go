@@ -14,10 +14,9 @@ var (
 	// +代表出现1次或多次
 	// \s\S各种字符
 	// +?代表贪婪模式
-	reLinke  = `href="(https?://[\s\S]+?)"`
-	rePhone  = `1[3456789]\d\s?\d{4}\s?\d{4}`
-	reIdcard = `[123456789]\d{5}((19\d{2})|(20[01]\d))((0[1-9])|(1[012]))((0[1-9])|([12]\d)|(3[01]))\d{3}[\dXx]`
-	reImg    = `https?://[^"]+?(\.((jpg)|(png)|(jpeg)|(gif)|(bmp)))`
+	reLinke = `href="(https?://[\s\S]+?)"`
+	rePhone = `1[3456789]\d\s?\d{4}\s?\d{4}`
+	reImg   = `https?://[^"]+?(\.((jpg)|(png)|(jpeg)|(gif)|(bmp)))`
 )
 
 // 处理异常
@@ -42,29 +41,18 @@ func GetPageStr(url string) (pageStr string) {
 
 func main() {
 	// 2.抽取的爬邮箱
-	// GetEmail2("https://tieba.baidu.com/p/6051076813?red_tag=1573533731")
+	// GetEmail2("https://tieba.baidu.com/p/8299418946")
 	// 3.爬链接
-	// GetLink("http://www.baidu.com/s?wd=%E8%B4%B4%E5%90%A7%20%E7%95%99%E4%B8%8B%E9%82%AE%E7%AE%B1&rsv_spt=1&rsv_iqid=0x98ace53400003985&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_dl=ib&rsv_sug2=0&inputT=5197&rsv_sug4=6345")
+	// GetLink("https://www.baidu.com/s?wd=%E5%8C%97%E4%BA%AC%E4%BD%8F%E6%88%BF%E5%85%AC%E7%A7%AF%E9%87%91%E6%89%A7%E8%A1%8C%E6%96%B0%E6%94%BF&tn=baidutop10&rsv_idx=2&usm=1&ie=utf-8&rsv_pq=fbfdf9710032b5bb&oq=AI%E7%94%A8%E8%8D%AF%E8%AF%B4%E6%98%8E%E4%B9%A6&rsv_t=966aARmwbiN1gMMB6seVwimtp2E7zxserKj8PfZw%2FgKWhYAzGEaM0oNe%2FKmcLDgIsg&rqid=fbfdf9710032b5bb&rsf=8cdaa38fc9fea91e45a8d70e06978ecc_1_15_15&rsv_dl=0_right_fyb_pchot_20811&sa=0_right_fyb_pchot_20811")
 	// 4.爬手机号
 	// GetPhone("https://www.zhaohaowang.com/")
-	// 5.爬身份证号
-	// GetIdCard("https://henan.qq.com/a/20171107/069413.htm")
-	// 6.爬图片
+	// 5.爬图片
 	GetImg("http://image.baidu.com/search/index?tn=baiduimage&ps=1&ct=201326592&lm=-1&cl=2&nc=1&ie=utf-8&word=%E7%BE%8E%E5%A5%B3")
 }
 
 func GetEmail2(url string) {
 	pageStr := GetPageStr(url)
 	re := regexp.MustCompile(reEmail)
-	results := re.FindAllStringSubmatch(pageStr, -1)
-	for _, result := range results {
-		fmt.Println(result)
-	}
-}
-
-func GetIdCard(url string) {
-	pageStr := GetPageStr(url)
-	re := regexp.MustCompile(reIdcard)
 	results := re.FindAllStringSubmatch(pageStr, -1)
 	for _, result := range results {
 		fmt.Println(result)

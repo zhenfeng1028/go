@@ -1,4 +1,3 @@
-// context_timeout/server/main.go
 package main
 
 import (
