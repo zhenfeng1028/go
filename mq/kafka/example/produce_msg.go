@@ -6,7 +6,7 @@ import (
 	"github.com/IBM/sarama"
 )
 
-// 基于sarama第三方库开发的kafka client
+// kafka producer
 
 func main() {
 	config := sarama.NewConfig()

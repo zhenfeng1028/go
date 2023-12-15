@@ -178,15 +178,12 @@ func (c *KafkaConsumer) Run(ctx context.Context, i int) error {
 
 // Consumer represents a Sarama consumer group consumer
 type Consumer struct {
-	// ready chan bool
 	number  int // 表示第几个consumer实例
 	excutor *ConcurrentExcutor
 }
 
 // Setup is run at the beginning of a new session, before ConsumeClaim
 func (consumer *Consumer) Setup(sarama.ConsumerGroupSession) error {
-	// Mark the consumer as ready
-	// close(consumer.ready)
 	return nil
 }
 

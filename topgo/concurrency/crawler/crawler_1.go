@@ -23,11 +23,11 @@ func GetEmail() {
 	pageBytes, err := io.ReadAll(resp.Body)
 	HandleError(err, "io.ReadAll")
 	// 字节转字符串
-	pageStr := string(pageBytes)
+	// pageStr := string(pageBytes)
 	// 3.过滤数据，过滤qq邮箱
 	re := regexp.MustCompile(reQQEmail)
 	// -1代表取全部
-	results := re.FindAllStringSubmatch(pageStr, -1)
+	results := re.FindAllSubmatch(pageBytes, -1)
 	fmt.Println(results)
 
 	// 遍历结果

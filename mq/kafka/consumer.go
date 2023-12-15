@@ -136,14 +136,11 @@ func (c *KafkaConsumer) Run(ctx context.Context) error {
 			log.Error("ctx error:", ctx.Err())
 			return ctx.Err()
 		}
-		// c.ready = make(chan bool)
 	}
 }
 
 // Setup is run at the beginning of a new session, before ConsumeClaim
 func (c *KafkaConsumer) Setup(sarama.ConsumerGroupSession) error {
-	// Mark the consumer as ready
-	// close(c.ready)
 	return nil
 }
 
