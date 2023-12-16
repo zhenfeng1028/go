@@ -16,7 +16,7 @@ var (
 	// +?代表贪婪模式
 	reLinke = `href="(https?://[\s\S]+?)"`
 	rePhone = `1[3456789]\d\s?\d{4}\s?\d{4}`
-	reImg   = `https?://[^"]+?(\.((jpg)|(png)|(jpeg)|(gif)|(bmp)))`
+	reImg   = `https?:\/\/[^"]+?(\.((jpg)|(png)|(jpeg)|(gif)|(bmp)))`
 )
 
 // 处理异常
@@ -29,9 +29,9 @@ func HandleError(err error, why string) {
 // 抽取根据url获取内容
 func GetPageStr(url string) (pageStr string) {
 	resp, err := http.Get(url)
-	HandleError(err, "http.Get url")
+	HandleError(err, "http.Get")
 	defer resp.Body.Close()
-	// 2.读取页面内容
+	// 读取页面内容
 	pageBytes, err := io.ReadAll(resp.Body)
 	HandleError(err, "io.ReadAll")
 	// 字节转字符串
@@ -47,7 +47,7 @@ func main() {
 	// 4.爬手机号
 	// GetPhone("https://www.zhaohaowang.com/")
 	// 5.爬图片
-	GetImg("http://image.baidu.com/search/index?tn=baiduimage&ps=1&ct=201326592&lm=-1&cl=2&nc=1&ie=utf-8&word=%E7%BE%8E%E5%A5%B3")
+	GetImg("https://huaban.com/pins/5445243320")
 }
 
 func GetEmail2(url string) {

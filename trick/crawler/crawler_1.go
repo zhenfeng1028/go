@@ -16,7 +16,7 @@ var (
 func GetEmail() {
 	// 1.去网站拿数据
 	resp, err := http.Get("https://tieba.baidu.com/p/8299418946")
-	HandleError(err, "http.Get url")
+	HandleError(err, "http.Get")
 	defer resp.Body.Close()
 	// 2.读取页面内容
 	pageBytes, err := io.ReadAll(resp.Body)

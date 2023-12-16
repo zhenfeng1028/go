@@ -17,13 +17,14 @@ Go1.7 加入了一个新的标准库 context，它定义了 Context 类型，专
 ## Context 接口
 context.Context 是一个接口，该接口定义了四个需要实现的方法。具体签名如下：
 
-
-    type Context interface {
-        Deadline() (deadline time.Time, ok bool)
-        Done() <-chan struct{}
-        Err() error
-        Value(key interface{}) interface{}
-    }
+```go
+type Context interface {
+    Deadline() (deadline time.Time, ok bool)
+    Done() <-chan struct{}
+    Err() error
+    Value(key interface{}) interface{}
+}
+```
 
 其中：
 * Deadline 方法需要返回当前Context被取消的时间，也就是完成工作的截止时间（deadline）；
@@ -44,10 +45,12 @@ background 和 todo 本质上都是 emptyCtx 结构体类型，是一个不可�
 
 ## With 系列函数
 
-    func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
-    func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
-    func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
-    func WithValue(parent Context, key, val interface{}) Context
+```go
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
+func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
+func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
+func WithValue(parent Context, key, val interface{}) Context
+```
 
 ## 使用 Context 的注意事项
 * 推荐以参数的方式显示传递 Context

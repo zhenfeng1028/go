@@ -5,3 +5,4 @@ test.go
 *.db
 xxx.md
 output.txt
+/assets

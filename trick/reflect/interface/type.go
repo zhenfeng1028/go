@@ -6,11 +6,10 @@ import (
 )
 
 // 反射获取interface类型信息
-
 func reflect_type(a interface{}) {
 	t := reflect.TypeOf(a)
 	fmt.Println(t)
-	// kind()可以获取具体类型
+	// Kind()可以获取具体类型
 	k := t.Kind()
 	fmt.Println(k)
 	switch k {

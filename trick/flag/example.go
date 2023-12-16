@@ -20,14 +20,12 @@ func main() {
 	// 解析命令行参数
 	flag.Parse()
 	fmt.Println(name, age, married, delay)
-	// 返回命令行参数后的其他参数
-	fmt.Println(flag.Args())
-	// 返回命令行参数后的其他参数个数
-	fmt.Println(flag.NArg())
-	// 返回使用的命令行参数个数
-	fmt.Println(flag.NFlag())
+
+	fmt.Println(flag.Args())  // 返回命令行参数后的其他参数
+	fmt.Println(flag.NArg())  // 返回命令行参数后的其他参数个数
+	fmt.Println(flag.NFlag()) // 返回使用的命令行参数个数
 }
 
-// 将上面的代码执行go build -o "example"编译之后，执行：
+// 将上面的代码执行go build -o example编译之后，执行：
 // ./example -name lizhenfeng -age 27 -married=false -d 1h30m
 // ./example -name lizhenfeng -age 27 -married=false -d 1h30m a b c

@@ -6,7 +6,6 @@ import (
 )
 
 // 反射获取interface值信息
-
 func reflect_value(a interface{}) {
 	v := reflect.ValueOf(a)
 	fmt.Println(v)

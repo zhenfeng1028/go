@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-// net/http post demo
-
 func main() {
 	url := "http://127.0.0.1:9090/"
 	contentType := "application/json"

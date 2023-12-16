@@ -32,9 +32,11 @@ func main() {
 	// Floating-point and complex constituents
 	fmt.Printf("%b\n", 123.456) // decimalless scientific notation with exponent a power of two, e.g. -123456p-78
 	fmt.Printf("%e\n", 123.456) // scientific notation, e.g. -1.234456e+78
-	fmt.Printf("%E\n", 1234.56) // scientific notation, e.g. -1.234456E+78
-	fmt.Printf("%f\n", 1234.56) // decimal point but no exponent, e.g. 123.456
-	fmt.Printf("%F\n", 1234.56) // synonym for %f
+	fmt.Printf("%E\n", 123.456) // scientific notation, e.g. -1.234456E+78
+	fmt.Printf("%f\n", 123.456) // decimal point but no exponent, e.g. 123.456
+	fmt.Printf("%F\n", 123.456) // synonym for %f
+	fmt.Printf("%g\n", 123.456) // %e for large exponents, %f otherwise
+	fmt.Printf("%G\n", 123.456) // %E for large exponents, %F otherwise
 	fmt.Printf("%x\n", 123.456) // hexadecimal notation (with decimal power of two exponent), e.g. -0x1.23abcp+20
 	fmt.Printf("%X\n", 123.456) // upper-case hexadecimal notation, e.g. -0X1.23ABCP+20
 
