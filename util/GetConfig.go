@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+// alternative: github.com/buger/jsonparser
+
 var str = `
 {
 	"person": {
@@ -29,7 +31,7 @@ func main() {
 }
 
 func GetString(keys ...string) (string, error) {
-	result, err := Get(configMap, keys...)
+	result, err := get(configMap, keys...)
 	if err != nil {
 		return "", err
 	}
@@ -42,7 +44,7 @@ func GetString(keys ...string) (string, error) {
 }
 
 func GetInt(keys ...string) (int, error) {
-	result, err := Get(configMap, keys...)
+	result, err := get(configMap, keys...)
 	if err != nil {
 		return -1, err
 	}
@@ -54,9 +56,9 @@ func GetInt(keys ...string) (int, error) {
 	return v, nil
 }
 
-func Get(config interface{}, keys ...string) (interface{}, error) {
+func get(config interface{}, keys ...string) (interface{}, error) {
 	for _, key := range keys {
-		c, err := GetKey(config, key)
+		c, err := getKey(config, key)
 		if err != nil {
 			return nil, err
 		}
@@ -65,7 +67,7 @@ func Get(config interface{}, keys ...string) (interface{}, error) {
 	return config, nil
 }
 
-func GetKey(config interface{}, key string) (interface{}, error) {
+func getKey(config interface{}, key string) (interface{}, error) {
 	m, ok := config.(map[string]interface{})
 	if !ok {
 		return nil, fmt.Errorf("config type error")
