@@ -15,20 +15,11 @@ func NewQueue() *Queue {
 }
 
 func (q *Queue) IsFull() bool {
-	if q.front == 0 && q.rear == SIZE-1 {
-		return true
-	}
-	if q.front == q.rear+1 {
-		return true
-	}
-	return false
+	return (q.front == 0 && q.rear == SIZE-1) || (q.front == q.rear+1)
 }
 
 func (q *Queue) IsEmpty() bool {
-	if q.front == -1 {
-		return true
-	}
-	return false
+	return q.front == -1
 }
 
 func (q *Queue) Enqueue(element int) {

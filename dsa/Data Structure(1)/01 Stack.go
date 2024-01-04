@@ -2,30 +2,29 @@ package main
 
 import "fmt"
 
-const SIZE = 10
+const initSize = 10
 
 type Stack struct {
-	items [SIZE]int
+	items []int
 	top   int
 	num   int
+	size  int
 }
 
 func NewStack() *Stack {
-	return &Stack{top: -1}
+	s := &Stack{}
+	s.top = -1
+	s.size = initSize
+	s.items = make([]int, initSize)
+	return s
 }
 
 func (s *Stack) IsFull() bool {
-	if s.top == SIZE-1 {
-		return true
-	}
-	return false
+	return s.top == s.size-1
 }
 
 func (s *Stack) IsEmpty() bool {
-	if s.top == -1 {
-		return true
-	}
-	return false
+	return s.top == -1
 }
 
 func (s *Stack) Push(item int) {

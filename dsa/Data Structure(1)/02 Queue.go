@@ -2,30 +2,29 @@ package main
 
 import "fmt"
 
-const SIZE = 5
+const initSize = 5
 
 type Queue struct {
-	items [SIZE]int
+	items []int
 	front int
 	rear  int
+	size  int
 }
 
 func NewQueue() *Queue {
-	return &Queue{front: -1, rear: -1}
+	q := &Queue{}
+	q.front = -1
+	q.rear = -1
+	q.items = make([]int, initSize)
+	return q
 }
 
 func (q *Queue) IsFull() bool {
-	if q.front == 0 && q.rear == SIZE-1 {
-		return true
-	}
-	return false
+	return q.front == 0 && q.rear == q.size-1
 }
 
 func (q *Queue) IsEmpty() bool {
-	if q.front == -1 {
-		return true
-	}
-	return false
+	return q.front == -1
 }
 
 func (q *Queue) Enqueue(element int) {

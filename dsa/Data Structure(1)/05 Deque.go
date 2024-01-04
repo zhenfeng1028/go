@@ -1,0 +1,128 @@
+package main
+
+import "fmt"
+
+const SIZE = 5
+
+type Deque struct {
+	arr   [SIZE]int
+	front int
+	rear  int
+}
+
+func NewDeque() *Deque {
+	return &Deque{front: -1, rear: 0}
+}
+
+func (q *Deque) IsFull() bool {
+	return (q.front == 0 && q.rear == SIZE-1) || (q.front == q.rear+1)
+}
+
+func (q *Deque) IsEmpty() bool {
+	return q.front == -1
+}
+
+func (q *Deque) InsertFront(key int) {
+	if q.IsFull() {
+		fmt.Println("Overflow")
+		return
+	}
+
+	if q.front == -1 {
+		q.front = 0
+		q.rear = 0
+	} else if q.front == 0 {
+		q.front = SIZE - 1
+	} else {
+		q.front = q.front - 1
+	}
+
+	q.arr[q.front] = key
+}
+
+func (q *Deque) InsertRear(key int) {
+	if q.IsFull() {
+		fmt.Println("Overflow")
+		return
+	}
+
+	if q.front == -1 {
+		q.front = 0
+		q.rear = 0
+	} else if q.rear == SIZE-1 {
+		q.rear = 0
+	} else {
+		q.rear = q.rear + 1
+	}
+
+	q.arr[q.rear] = key
+}
+
+func (q *Deque) DeleteFront() {
+	if q.IsEmpty() {
+		fmt.Println("Underflow")
+		return
+	}
+
+	if q.front == q.rear {
+		q.front = -1
+		q.rear = -1
+	} else if q.front == SIZE-1 {
+		q.front = 0
+	} else {
+		q.front = q.front + 1
+	}
+}
+
+func (q *Deque) DeleteRear() {
+	if q.IsEmpty() {
+		fmt.Println("Underflow")
+		return
+	}
+
+	if q.front == q.rear {
+		q.front = -1
+		q.rear = -1
+	} else if q.rear == 0 {
+		q.rear = SIZE - 1
+	} else {
+		q.rear = q.rear - 1
+	}
+}
+
+func (q *Deque) GetFront() int {
+	if q.IsEmpty() {
+		fmt.Println("Underflow")
+		return -1
+	}
+	return q.arr[q.front]
+}
+
+func (q *Deque) GetRear() int {
+	if q.IsEmpty() {
+		fmt.Println("Underflow")
+		return -1
+	}
+	return q.arr[q.rear]
+}
+
+func main() {
+	q := NewDeque()
+
+	fmt.Println("insert element at rear end")
+	q.InsertRear(5)
+	q.InsertRear(11)
+
+	fmt.Printf("rear element: %d\n", q.GetRear())
+
+	q.DeleteRear()
+	fmt.Printf("after deletion of the rear element, the new rear element: %d\n", q.GetRear())
+
+	fmt.Println("insert element at front end")
+	q.InsertFront(8)
+
+	fmt.Printf("front element: %d\n", q.GetFront())
+
+	q.DeleteFront()
+	fmt.Printf("after deletion of the front element, the new front element: %d\n", q.GetFront())
+}
