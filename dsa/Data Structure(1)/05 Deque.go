@@ -2,12 +2,13 @@ package main
 
 import "fmt"
 
-const SIZE = 5
+const initSize = 5
 
 type Deque struct {
-	arr   [SIZE]int
+	arr   []int
 	front int
 	rear  int
+	size  int
 }
 
 func NewDeque() *Deque {
@@ -15,7 +16,7 @@ func NewDeque() *Deque {
 }
 
 func (q *Deque) IsFull() bool {
-	return (q.front == 0 && q.rear == SIZE-1) || (q.front == q.rear+1)
+	return (q.front == 0 && q.rear == q.size-1) || (q.front == q.rear+1)
 }
 
 func (q *Deque) IsEmpty() bool {
@@ -32,7 +33,7 @@ func (q *Deque) InsertFront(key int) {
 		q.front = 0
 		q.rear = 0
 	} else if q.front == 0 {
-		q.front = SIZE - 1
+		q.front = q.size - 1
 	} else {
 		q.front = q.front - 1
 	}
@@ -49,7 +50,7 @@ func (q *Deque) InsertRear(key int) {
 	if q.front == -1 {
 		q.front = 0
 		q.rear = 0
-	} else if q.rear == SIZE-1 {
+	} else if q.rear == q.size-1 {
 		q.rear = 0
 	} else {
 		q.rear = q.rear + 1
@@ -67,7 +68,7 @@ func (q *Deque) DeleteFront() {
 	if q.front == q.rear {
 		q.front = -1
 		q.rear = -1
-	} else if q.front == SIZE-1 {
+	} else if q.front == q.size-1 {
 		q.front = 0
 	} else {
 		q.front = q.front + 1
@@ -84,7 +85,7 @@ func (q *Deque) DeleteRear() {
 		q.front = -1
 		q.rear = -1
 	} else if q.rear == 0 {
-		q.rear = SIZE - 1
+		q.rear = q.size - 1
 	} else {
 		q.rear = q.rear - 1
 	}

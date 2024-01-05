@@ -2,12 +2,13 @@ package main
 
 import "fmt"
 
-const SIZE = 5
+const initSize = 5
 
 type Queue struct {
-	items [SIZE]int
+	items []int
 	front int
 	rear  int
+	size  int
 }
 
 func NewQueue() *Queue {
@@ -15,7 +16,7 @@ func NewQueue() *Queue {
 }
 
 func (q *Queue) IsFull() bool {
-	return (q.front == 0 && q.rear == SIZE-1) || (q.front == q.rear+1)
+	return (q.front == 0 && q.rear == q.size-1) || (q.front == q.rear+1)
 }
 
 func (q *Queue) IsEmpty() bool {
@@ -29,7 +30,7 @@ func (q *Queue) Enqueue(element int) {
 		if q.front == -1 {
 			q.front = 0
 		}
-		q.rear = (q.rear + 1) % SIZE
+		q.rear = (q.rear + 1) % q.size
 		q.items[q.rear] = element
 		fmt.Println("Inserted", element)
 	}
@@ -47,7 +48,7 @@ func (q *Queue) Dequeue() int {
 			q.front = -1
 			q.rear = -1
 		} else {
-			q.front = (q.front + 1) % SIZE
+			q.front = (q.front + 1) % q.size
 		}
 		fmt.Println("Deleted", element)
 		return element
@@ -58,7 +59,7 @@ func (q *Queue) Display() {
 	fmt.Println("Front index ->", q.front)
 	fmt.Print("Items -> ")
 	var i int
-	for i = q.front; i != q.rear; i = (i + 1) % SIZE {
+	for i = q.front; i != q.rear; i = (i + 1) % q.size {
 		fmt.Printf("%d ", q.items[i])
 	}
 	fmt.Println(q.items[i])
@@ -78,7 +79,7 @@ func main() {
 	q.Enqueue(4)
 	q.Enqueue(5)
 
-	// Fails to enqueue because front == 0 && rear == SIZE - 1
+	// Fails to enqueue because front == 0 && rear == q.size - 1
 	q.Enqueue(6)
 
 	q.Display()

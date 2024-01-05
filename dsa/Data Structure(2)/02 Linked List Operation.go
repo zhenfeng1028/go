@@ -7,37 +7,32 @@ type Node struct {
 	next *Node
 }
 
-func insertAtBeginning(head_ref **Node, new_data int) {
-	new_node := &Node{
-		data: new_data,
-		next: *head_ref,
-	}
+func insertAtBeginning(head_ref **Node, data int) {
+	newNode := &Node{data: data}
 
-	*head_ref = new_node // move head to new node
+	newNode.next = *head_ref
+
+	*head_ref = newNode // move head to new node
 }
 
-func insertAfter(prev_node *Node, new_data int) {
-	if prev_node == nil {
+func insertAfter(prevNode *Node, data int) {
+	if prevNode == nil {
 		fmt.Println("the given previous node cannot be null")
 		return
 	}
 
-	new_node := &Node{
-		data: new_data,
-		next: prev_node.next,
-	}
+	newNode := &Node{data: data}
 
-	prev_node.next = new_node
+	newNode.next = prevNode.next
+
+	prevNode.next = newNode
 }
 
-func insertAtEnd(head_ref **Node, new_data int) {
-	new_node := &Node{
-		data: new_data,
-		next: nil,
-	}
+func insertAtEnd(head_ref **Node, data int) {
+	newNode := &Node{data: data}
 
 	if *head_ref == nil {
-		*head_ref = new_node
+		*head_ref = newNode
 		return
 	}
 
@@ -46,7 +41,7 @@ func insertAtEnd(head_ref **Node, new_data int) {
 		last = last.next
 	}
 
-	last.next = new_node
+	last.next = newNode
 }
 
 func deleteNode(head_ref **Node, key int) {
