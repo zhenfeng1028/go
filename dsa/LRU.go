@@ -41,7 +41,7 @@ func NewSimpleLRU(capacity int, onEvict EvictCallBack) *SimpleLRU {
 }
 
 func (s *SimpleLRU) Get(key interface{}) (value interface{}, ok bool) {
-	// 快速查找， 散列表中是否存在
+	// 快速查找，散列表中是否存在
 	if e, ok := s.items[key]; ok {
 		// 移到队首
 		s.evictList.MoveToFront(e)
@@ -52,7 +52,7 @@ func (s *SimpleLRU) Get(key interface{}) (value interface{}, ok bool) {
 }
 
 func (s *SimpleLRU) Set(key, value interface{}) {
-	// 快速查找， 散列表中是否存在
+	// 快速查找，散列表中是否存在
 	if e, ok := s.items[key]; ok {
 		kvp, _ := e.Value.(*KVP)
 		kvp.value = value
