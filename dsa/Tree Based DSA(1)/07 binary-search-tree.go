@@ -20,17 +20,17 @@ func inorder(node *Node) {
 }
 
 // insert a node
-func insert(node *Node, key int) *Node {
+func insert(node *Node, data int) *Node {
 	// return a new node if the tree is empty
 	if node == nil {
-		return &Node{data: key}
+		return &Node{data: data}
 	}
 
 	// traverse to the right place and insert the node
-	if key < node.data {
-		node.left = insert(node.left, key)
+	if data < node.data {
+		node.left = insert(node.left, data)
 	} else {
-		node.right = insert(node.right, key)
+		node.right = insert(node.right, data)
 	}
 
 	return node
@@ -46,17 +46,17 @@ func minValueNode(node *Node) *Node {
 }
 
 // delete a node
-func delete(node *Node, key int) *Node {
+func delete(node *Node, data int) *Node {
 	// return if the tree is empty
 	if node == nil {
 		return node
 	}
 
 	// find the node to be deleted
-	if key < node.data {
-		node.left = delete(node.left, key)
-	} else if key > node.data {
-		node.right = delete(node.right, key)
+	if data < node.data {
+		node.left = delete(node.left, data)
+	} else if data > node.data {
+		node.right = delete(node.right, data)
 	} else {
 		// if the node is with only one child or no child
 		if node.left == nil {
