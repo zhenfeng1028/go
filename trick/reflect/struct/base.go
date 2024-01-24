@@ -34,7 +34,7 @@ func Poni(o interface{}) {
 		// 获取字段的值信息
 		// Interface()：获取字段对应的值
 		val := v.Field(i).Interface()
-		fmt.Println(" val: ", val)
+		fmt.Println(" val:", val)
 	}
 	fmt.Println("=================方法====================")
 	for i := 0; i < t.NumMethod(); i++ {

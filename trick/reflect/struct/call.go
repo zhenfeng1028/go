@@ -13,7 +13,7 @@ type User struct {
 }
 
 func (u User) Hello(name string) {
-	fmt.Println("Hello：", name)
+	fmt.Println("Hello", name)
 }
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 	v := reflect.ValueOf(u)
 	// 获取方法
 	m := v.MethodByName("Hello")
-	// 构建一些参数
+	// 构建参数
 	args := []reflect.Value{reflect.ValueOf("lizhenfeng")}
 	// 调用方法，需要传入方法的参数
 	m.Call(args)
