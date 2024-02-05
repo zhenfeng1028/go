@@ -4,7 +4,7 @@ import "fmt"
 
 type BTreeNode struct {
 	keys []int        // An array of keys
-	t    int          // Minimun degree
+	t    int          // Minimun degree (t >= 2)
 	C    []*BTreeNode // An array of child pointers
 	n    int          // Current number of keys
 	leaf bool         // Is true when node is leaf. Otherwise false
