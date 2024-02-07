@@ -4,8 +4,8 @@ import (
 	"fmt"
 )
 
+// 分治，两两拆分，一直拆到基础元素才向上递归合并
 func mergeSort(nums []int) []int {
-	// 分治，两两拆分，一直拆到基础元素才向上递归
 	if len(nums) < 2 {
 		return nums
 	}
