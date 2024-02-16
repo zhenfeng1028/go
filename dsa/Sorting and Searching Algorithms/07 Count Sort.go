@@ -21,7 +21,7 @@ func countSort(arr []int, size int) {
 		count[arr[i]]++
 	}
 
-	// Store the cummulative count of each array
+	// Store the cumulative count of each array
 	for i := 1; i <= max; i++ {
 		count[i] += count[i-1]
 	}
