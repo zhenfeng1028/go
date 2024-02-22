@@ -31,9 +31,9 @@ func (g *Graph) BFS(startVertex int) {
 	g.visited[startVertex] = true
 	queue = append(queue, startVertex)
 	for len(queue) != 0 {
-		currentVertex := queue[len(queue)-1]
+		currentVertex := queue[0]
 		fmt.Print(currentVertex, " ")
-		queue = queue[:len(queue)-1]
+		queue = queue[1:]
 		adjList := g.adjLists[currentVertex]
 		for e := adjList.Front(); e != nil; e = e.Next() {
 			if adjVertex, ok := e.Value.(int); ok {
