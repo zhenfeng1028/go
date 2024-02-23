@@ -23,10 +23,10 @@ func workOnce(wg *sync.WaitGroup) {
 }
 
 func main() {
-	var cpuProfile = flag.String("cpuprofile", "", "write cpu profile to file")
-	var memProfile = flag.String("memprofile", "", "write mem profile to file")
+	cpuProfile := flag.String("cpuprofile", "", "write cpu profile to file")
+	memProfile := flag.String("memprofile", "", "write mem profile to file")
 	flag.Parse()
-	//采样cpu运行状态
+	// 采样cpu运行状态
 	if *cpuProfile != "" {
 		f, err := os.Create(*cpuProfile)
 		if err != nil {
@@ -43,7 +43,7 @@ func main() {
 	}
 
 	wg.Wait()
-	//采样memory状态
+	// 采样memory状态
 	if *memProfile != "" {
 		f, err := os.Create(*memProfile)
 		if err != nil {

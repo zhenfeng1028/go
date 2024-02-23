@@ -21,7 +21,6 @@ type Class struct {
 }
 
 func main() {
-
 	data := "{\"name\":\"张三\",\"Age\":18,\"CLASS\":{\"naME\":\"1班\",\"GradE\":3}}"
 	str := []byte(data)
 	stu := Stu{}

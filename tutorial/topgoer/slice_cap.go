@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	s := make([]int, 0, 1)
 	c := cap(s)
 
@@ -17,5 +16,4 @@ func main() {
 			c = n
 		}
 	}
-
 }

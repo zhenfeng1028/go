@@ -38,7 +38,6 @@ type Stu4 struct {
 }
 
 func main() {
-
 	data := "{\"name\":\"张三\"}"
 	str := []byte(data)
 

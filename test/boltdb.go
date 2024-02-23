@@ -14,11 +14,12 @@ import (
 	"github.com/boltdb/bolt"
 )
 
-var db *bolt.DB
-var err error
+var (
+	db  *bolt.DB
+	err error
+)
 
 func main() {
-
 	// Open the my.db data file in your current directory.
 	// It will be created if it doesn't exist.
 	db, err = bolt.Open("my.db", 0600, nil)
@@ -41,7 +42,6 @@ func main() {
 
 	user := &User{Name: "lzf"}
 	err = store.CreateUser(user)
-
 	if err != nil {
 		log.Fatal(err)
 	}

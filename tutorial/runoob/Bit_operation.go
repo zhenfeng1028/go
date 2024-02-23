@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func main() {
-
 	var a uint = 60 /* 60 = 0011 1100 */
 	var b uint = 13 /* 13 = 0000 1101 */
 	var c uint = 0

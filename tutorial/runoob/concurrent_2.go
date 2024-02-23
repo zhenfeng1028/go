@@ -11,6 +11,7 @@ func say(s string) {
 		fmt.Println(s, (i+1)*100)
 	}
 }
+
 func say2(s string, ch chan int) {
 	for i := 0; i < 5; i++ {
 		time.Sleep(150 * time.Millisecond)

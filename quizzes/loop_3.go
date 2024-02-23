@@ -5,7 +5,7 @@ type Book struct {
 }
 
 func f() int {
-	var books = []Book{{555}}
+	books := []Book{{555}}
 	for _, book := range books {
 		book.Pages = 999
 	}
@@ -13,7 +13,7 @@ func f() int {
 }
 
 func g() int {
-	var books = []*Book{{555}}
+	books := []*Book{{555}}
 	for _, book := range books {
 		book.Pages = 999
 	}

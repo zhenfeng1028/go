@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-type ErrNegativeSqrt float64 //创建一个新的类型
+type ErrNegativeSqrt float64 // 创建一个新的类型
 
 func (e ErrNegativeSqrt) Error() string {
 	return fmt.Sprintf("cannot Sqrt negative number:  %v", float64(e))

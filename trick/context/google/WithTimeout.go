@@ -20,5 +20,4 @@ func main() {
 	case <-ctx.Done():
 		fmt.Println(ctx.Err()) // prints "context deadline exceeded"
 	}
-
 }

@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	var x = []string{"A", "B", "C"}
+	x := []string{"A", "B", "C"}
 
 	for i, s := range x {
 		print(i, s, " ")

@@ -41,6 +41,7 @@ func HandleError(err error, why string) {
 		fmt.Println(why, err)
 	}
 }
+
 func main() {
 	GetEmail()
 }

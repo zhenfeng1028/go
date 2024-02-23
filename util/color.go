@@ -9,7 +9,6 @@ import (
 // 参数1表示字体背景颜色，参数2表示字体颜色，参数3表示字体格式
 
 func main() {
-
 	msg := "an old falcon"
 
 	// 字体格式

@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	var numbers = make([]int, 3, 5)
+	numbers := make([]int, 3, 5)
 
 	printSlice(numbers)
 }

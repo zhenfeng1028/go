@@ -43,7 +43,6 @@ func postScrape() {
 	enc = mahonia.NewDecoder("gbk")
 
 	doc.Find("table.info_table tbody tr").Each(func(i int, tr *goquery.Selection) {
-		
 		x := Xzqh{}
 
 		tr.Find("td").Each(func(ix int, td *goquery.Selection) {

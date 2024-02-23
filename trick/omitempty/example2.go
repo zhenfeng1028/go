@@ -16,7 +16,6 @@ type Address struct {
 
 // 可以在 Golang 的结构体定义中添加 omitempty 关键字，来表示这条信息如果没有提供，在序列化成 json 的时候就不要包含其默认值。
 func main() {
-
 	data := `{
 			  "street": "200 Larkin St",
 			  "city": "San Francisco",

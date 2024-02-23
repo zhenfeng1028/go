@@ -2,9 +2,11 @@ package main
 
 const N = 1
 
-var n = N
-var a byte = 128 << N >> N // equivalent to var a = byte(int(128) << N >> N)
-var b byte = 128 << n >> n // equivalent to var a = byte(128) << N >> N
+var (
+	n      = N
+	a byte = 128 << N >> N // equivalent to var a = byte(int(128) << N >> N)
+	b byte = 128 << n >> n // equivalent to var a = byte(128) << N >> N
+)
 
 func main() {
 	println(a, b)

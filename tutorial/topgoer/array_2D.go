@@ -4,8 +4,10 @@ import (
 	"fmt"
 )
 
-var arr0 [5][3]int
-var arr1 [2][3]int = [...][3]int{{1, 2, 3}, {7, 8, 9}}
+var (
+	arr0 [5][3]int
+	arr1 [2][3]int = [...][3]int{{1, 2, 3}, {7, 8, 9}}
+)
 
 func main() {
 	a := [2][3]int{{1, 2, 3}, {4, 5, 6}}

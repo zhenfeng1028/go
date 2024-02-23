@@ -3,9 +3,8 @@ package main
 import "fmt"
 
 func main() {
-
 	// 声明一个变量并初始化
-	var a = "RUNOOB"
+	a := "RUNOOB"
 	fmt.Println(a)
 
 	// 没有初始化就为零值

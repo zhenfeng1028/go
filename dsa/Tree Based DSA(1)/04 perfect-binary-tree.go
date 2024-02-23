@@ -8,7 +8,7 @@ type Node struct {
 }
 
 func depth(node *Node) int {
-	var d = 0
+	d := 0
 	for node.left != nil {
 		d++
 		node = node.left

@@ -37,7 +37,6 @@ func main() {
 		elapsed := time.Since(t1)
 		fmt.Println("testdefer elapsed: ", elapsed)
 	}()
-
 }
 
 // 滥用 defer 可能会导致性能问题，尤其是在一个 "大循环" 里。

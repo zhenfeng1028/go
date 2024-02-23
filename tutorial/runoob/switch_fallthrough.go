@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func main() {
-
 	switch {
 	case false:
 		fmt.Println("1、case 条件语句为 false")

@@ -22,7 +22,6 @@ type Coordinate struct {
 
 // 为了达到我们想要的效果，可以把坐标定义为指针类型，这样 Golang 就能知道一个指针的“空值”是多少了，否则面对一个我们自定义的结构， Golang 是猜不出我们想要的空值的。
 func main() {
-
 	data := `{
 			  "street": "200 Larkin St",
 			  "city": "San Francisco",

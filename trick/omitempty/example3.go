@@ -22,7 +22,6 @@ type Coordinate struct {
 
 // 读入原来的地址数据，处理后序列化输出，我们就会发现即使加上了 omitempty 关键字，输出的 json 还是带上了一个空的坐标信息
 func main() {
-
 	data := `{
 			  "street": "200 Larkin St",
 			  "city": "San Francisco",

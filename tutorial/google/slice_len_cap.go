@@ -10,7 +10,7 @@ func main() {
 	s = s[:0]
 	printSlice(s)
 
-	// 拓展其长度 
+	// 拓展其长度
 	s = s[:4]
 	printSlice(s)
 

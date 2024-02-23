@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	data := [...]int{0, 1, 2, 3, 4, 10: 0}
 	s := data[:2:3] // 从切片data的索引位置0到2处所获得的切片s，cap = 3
 
@@ -14,5 +13,4 @@ func main() {
 
 	fmt.Println(s, data)         // 重新分配底层数组，与原数组无关。
 	fmt.Println(&s[0], &data[0]) // 比对底层数组起始指针。
-
 }

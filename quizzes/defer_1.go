@@ -12,8 +12,8 @@ func (Foo) Bar(n *int) {
 }
 
 func main() {
-	var x = 1
-	var p = &x
+	x := 1
+	p := &x
 	defer MakeFoo(p).Bar(p) // line 17
 	x = 2
 	p = new(int) // line 19

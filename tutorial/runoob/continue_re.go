@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func main() {
-
 	// 不使用标记
 	fmt.Println("---- continue ---- ")
 	for i := 1; i <= 3; i++ {

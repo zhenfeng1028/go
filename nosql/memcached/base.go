@@ -6,9 +6,7 @@ import (
 	"github.com/bradfitz/gomemcache/memcache"
 )
 
-var (
-	server = "127.0.0.1:11211"
-)
+var server = "127.0.0.1:11211"
 
 func main() {
 	// create a handle

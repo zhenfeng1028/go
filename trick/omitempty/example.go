@@ -17,7 +17,6 @@ type Address struct {
 // 多了一行 "suite": "", ，而这则信息在原本的 json 数据中是没有的
 // 但我们更希望的是，在一个地址有 suite 号码的时候输出，不存在 suite 的时候就不输出
 func main() {
-
 	data := `{
 			  "street": "200 Larkin St",
 			  "city": "San Francisco",

@@ -7,8 +7,10 @@ import (
 
 type Singleton struct{}
 
-var singleton *Singleton
-var once sync.Once
+var (
+	singleton *Singleton
+	once      sync.Once
+)
 
 func GetSingletonObj() *Singleton {
 	once.Do(func() {

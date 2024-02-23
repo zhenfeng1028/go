@@ -17,7 +17,7 @@ func selectionSort(arr []int, size int) {
 }
 
 func main() {
-	var a = []int{3, 2, 5, 4, 6, 9, 7, 8, 1}
+	a := []int{3, 2, 5, 4, 6, 9, 7, 8, 1}
 	selectionSort(a, len(a))
 	fmt.Println(a)
 }

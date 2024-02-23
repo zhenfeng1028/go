@@ -42,7 +42,7 @@ func main() {
 
 	// String and slice of bytes
 	fmt.Printf("%s\n", "lzf") // the uninterpreted bytes of the string or slice
-	fmt.Printf("%q\n", "lzf") //a double-quoted string safely escaped with Go syntax
+	fmt.Printf("%q\n", "lzf") // a double-quoted string safely escaped with Go syntax
 	fmt.Printf("%x\n", "lzf") // base 16, lower-case, two characters per byte
 	fmt.Printf("%X\n", "lzf") // base 16, upper-case, two characters per byte
 

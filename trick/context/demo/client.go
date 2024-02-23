@@ -20,7 +20,8 @@ func doCall(ctx context.Context) {
 	transport := http.Transport{
 		// 请求频繁可定义全局的client对象并启用长链接
 		// 请求不频繁使用短链接
-		DisableKeepAlives: true}
+		DisableKeepAlives: true,
+	}
 	client := http.Client{
 		Transport: &transport,
 	}

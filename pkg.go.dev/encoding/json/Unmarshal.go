@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	var jsonBlob = []byte(`[
+	jsonBlob := []byte(`[
 	{"Name": "Platypus", "Order": "Monotremata"},
 	{"Name": "Quoll",    "Order": "Dasyuromorphia"}
 ]`)

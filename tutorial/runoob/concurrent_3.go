@@ -21,16 +21,16 @@ func main() {
 	s := []int{7, 2, 8, -9, 4, 0}
 	c := make(chan int)
 	fmt.Println("go [0,3]")
-	go sum(s[:len(s)/2], c) //a
+	go sum(s[:len(s)/2], c) // a
 
 	// 这里开启一个新的运行期线程，这个是需要时间的，本程序继续往下走
 
 	fmt.Println("go [3,6]")
-	go sum(s[len(s)/2:], c) //b
+	go sum(s[len(s)/2:], c) // b
 	fmt.Println("go2 [0,3]")
-	go sum(s[:len(s)/2], c) //c
+	go sum(s[:len(s)/2], c) // c
 	fmt.Println("go2 [3,6]")
-	go sum(s[len(s)/2:], c) //d
+	go sum(s[len(s)/2:], c) // d
 
 	/*
 	   a b c d和main一起争夺cpu的，他们的执行顺序完全无序，甚至里面不同的语句都相互穿插

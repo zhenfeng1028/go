@@ -8,8 +8,10 @@ import (
 	log "github.com/xiaomi-tc/log15"
 )
 
-const injectNation = "X-manual-nation"
-const connectStr = "root:@tcp(localhost:3306)/test?charset=utf8&parseTime=True&loc=Local"
+const (
+	injectNation = "X-manual-nation"
+	connectStr   = "root:@tcp(localhost:3306)/test?charset=utf8&parseTime=True&loc=Local"
+)
 
 type Person struct {
 	Id     int64  `gorm:"column:id"`
@@ -20,7 +22,6 @@ type Person struct {
 }
 
 func main() {
-
 	db, err := gorm.Open("mysql", connectStr)
 	if err != nil {
 		panic("failed to connect database")

@@ -38,8 +38,8 @@ type ServiceInfo struct {
 	Status      string
 	PackageName string
 	Load        int
-	Times       int   //被调用次数
-	Timestamp   int64 //load updated ts
+	Times       int   // 被调用次数
+	Timestamp   int64 // load updated ts
 }
 
 func main() {

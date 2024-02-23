@@ -19,7 +19,7 @@ import (
 */
 
 func main() {
-	var ctx = context.Background()
+	ctx := context.Background()
 
 	kcc := KafkaClientConfig{
 		Brokers: make([]string, 0),
@@ -51,7 +51,6 @@ func main() {
 		msg, ok := data.([]byte)
 		if !ok {
 			log.Warnf("data is not of type []byte")
-
 		}
 		log.Printf("receive data: %v\n", string(msg))
 	}
@@ -151,7 +150,6 @@ func (c *KafkaConsumer) Cleanup(sarama.ConsumerGroupSession) error {
 
 // ConsumeClaim must start a consumer loop of ConsumerGroupClaim's Messages().
 func (c *KafkaConsumer) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
-
 	// NOTE:
 	// Do not move the code below to a goroutine.
 	// The `ConsumeClaim` itself is called within a goroutine, see:

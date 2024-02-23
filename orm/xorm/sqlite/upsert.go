@@ -15,7 +15,6 @@ type User struct {
 }
 
 func main() {
-
 	engine, err := xorm.NewEngine("sqlite3", "./data.db")
 	if err != nil {
 		log.Fatal("init engine err: ", err)
@@ -48,7 +47,7 @@ func main() {
 	// var sql = "insert or replace into user(name,age,address) values('lizhenfeng2',18,'Chenchun Road 2') on conflict(name) do update set age=excluded.age, address=excluded.address;"
 
 	// 4，如果传递了主键，是可以修改唯一键字段内容的。
-	var sql = "insert or replace into user(id,name,age,address) values(1,'lizhenfeng1',18,'Chenchun Road 2') on conflict(name) do update set name=excluded.name, age=excluded.age, address=excluded.address;"
+	sql := "insert or replace into user(id,name,age,address) values(1,'lizhenfeng1',18,'Chenchun Road 2') on conflict(name) do update set name=excluded.name, age=excluded.age, address=excluded.address;"
 
 	_, err = session.Exec(sql)
 	if err != nil {

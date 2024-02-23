@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func main() {
-
 	var a int = 21
 	var b int = 10
 	var c int

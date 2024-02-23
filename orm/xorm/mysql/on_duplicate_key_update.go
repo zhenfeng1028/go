@@ -49,7 +49,7 @@ func main() {
 	// var sql = "insert into person(name,age,address) values('lizhenfeng2',18,'Chenchun Road 2') on duplicate key update age = values(age), address = values(address);"
 
 	// 4，如果传递了主键，是可以修改唯一键字段内容的。
-	var sql = "insert into person(id,name,age,address) values(1,'lizhenfeng1',18,'Chenchun Road 2') on duplicate key update name = values(name), age = values(age), address = values(address);"
+	sql := "insert into person(id,name,age,address) values(1,'lizhenfeng1',18,'Chenchun Road 2') on duplicate key update name = values(name), age = values(age), address = values(address);"
 
 	_, err = session.Exec(sql)
 	if err != nil {

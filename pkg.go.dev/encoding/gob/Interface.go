@@ -43,7 +43,6 @@ func main() {
 		result := interfaceDecode(dec)
 		fmt.Println(result.Hypotenuse())
 	}
-
 }
 
 // interfaceEncode encodes the interface value into the encoder.

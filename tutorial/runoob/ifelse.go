@@ -15,5 +15,4 @@ func main() {
 		fmt.Printf("a 不小于 20\n")
 	}
 	fmt.Printf("a 的值为 : %d\n", a)
-
 }

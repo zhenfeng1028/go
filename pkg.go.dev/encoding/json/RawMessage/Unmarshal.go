@@ -22,7 +22,7 @@ func main() {
 		Cr int8
 	}
 
-	var j = []byte(`[
+	j := []byte(`[
 	{"Space": "YCbCr", "Point": {"Y": 255, "Cb": 0, "Cr": -10}},
 	{"Space": "RGB",   "Point": {"R": 98, "G": 218, "B": 255}}
 ]`)

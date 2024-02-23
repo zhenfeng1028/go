@@ -27,7 +27,7 @@ func main() {
 
 // 数组下标转换成excel坐标
 func ChangIndexToAxis(intIndexX int, intIndexY int) string {
-	var arr = [...]string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+	arr := [...]string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
 	intIndexY = intIndexY + 1
 	resultY := ""
 	for true {

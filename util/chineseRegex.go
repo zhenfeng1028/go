@@ -7,7 +7,6 @@ import (
 
 // 中文正则匹配
 func main() {
-
 	m, _ := regexp.MatchString("^\\p{Han}+$", "你好")
 	fmt.Println(m)
 

@@ -31,6 +31,7 @@ func main() {
 	/* 打印 Book2 信息 */
 	printBook(&Book2)
 }
+
 func printBook(book *Books) {
 	fmt.Printf("Book title : %s\n", book.title)
 	fmt.Printf("Book author : %s\n", book.author)

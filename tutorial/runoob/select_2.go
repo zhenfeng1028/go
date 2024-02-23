@@ -16,7 +16,6 @@ func Chann(ch chan int, stopCh chan bool) {
 }
 
 func main() {
-
 	ch := make(chan int)
 	c := 0
 	stopCh := make(chan bool)

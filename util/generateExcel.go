@@ -17,10 +17,9 @@ type Person struct {
 }
 
 func main() {
-
 	list := []Person{{"aaa", 28, "male"}, {"bbb", 26, "female"}}
 
-	var interfaceSlice = make([]interface{}, len(list))
+	interfaceSlice := make([]interface{}, len(list))
 	for k, v := range list {
 		interfaceSlice[k] = v
 	}
@@ -43,7 +42,7 @@ func GenerateExcel(r []interface{}, filename string) error {
 	if err != nil {
 		return err
 	}
-	var interfaceSlice = make([]interface{}, len(titles))
+	interfaceSlice := make([]interface{}, len(titles))
 	for i, d := range titles {
 		interfaceSlice[i] = d
 	}

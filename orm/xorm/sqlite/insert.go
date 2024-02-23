@@ -46,7 +46,7 @@ func main() {
 	// 	// {UserName: "wangwu", Job: "engineer", Hobby: "play football"},
 	// }
 
-	var sql = "insert or replace into user(id,user_name,age,job,hobby) values(1,'lizhenfeng',18,'teacher','watch tv') on conflict do update set user_name=excluded.user_name, age=excluded.age, job=excluded.job, hobby=excluded.hobby;"
+	sql := "insert or replace into user(id,user_name,age,job,hobby) values(1,'lizhenfeng',18,'teacher','watch tv') on conflict do update set user_name=excluded.user_name, age=excluded.age, job=excluded.job, hobby=excluded.hobby;"
 
 	_, err = session.Exec(sql)
 	if err != nil {

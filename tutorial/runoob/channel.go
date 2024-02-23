@@ -21,7 +21,7 @@ func main() {
 
 	x := <-c
 	y := <-c
-	//x, y := <-c, <-c // 从通道 c 中接收
+	// x, y := <-c, <-c // 从通道 c 中接收
 
 	fmt.Println(x, y, x+y)
 }

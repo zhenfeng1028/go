@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	s := "abc你好"
 	r := "123你好"
-	fmt.Println("len(s)=", len([]byte(s)), "len(r)=", len([]rune(r))) //len(s)= 9 len(r)= 5
+	fmt.Println("len(s)=", len([]byte(s)), "len(r)=", len([]rune(r))) // len(s)= 9 len(r)= 5
 
 	for k, v := range r {
 		fmt.Println("k=", k, "v=", v)

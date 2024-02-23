@@ -37,5 +37,4 @@ func main() {
 
 	c |= 2
 	fmt.Printf("第 10 行 - |= 运算符实例，c 值为 = %d\n", c)
-
 }

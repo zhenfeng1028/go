@@ -1,7 +1,9 @@
 package main
 
-var x = *new(*int)
-var y *int = nil
+var (
+	x      = *new(*int)
+	y *int = nil
+)
 
 func f() interface{} {
 	return y

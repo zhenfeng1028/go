@@ -21,5 +21,4 @@ func main() {
 
 	f(ctx, k)
 	f(ctx, favContextKey("color"))
-
 }

@@ -31,7 +31,6 @@ var (
 )
 
 func main() {
-
 	// 1.初始化管道
 	chanImageUrls = make(chan string, 1000000)
 	chanTask = make(chan Task, 26)

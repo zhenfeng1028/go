@@ -5,8 +5,10 @@ import (
 	"sync"
 )
 
-var populateMapsOnce sync.Once
-var entity map[string]rune
+var (
+	populateMapsOnce sync.Once
+	entity           map[string]rune
+)
 
 func populateMaps() {
 	entity = map[string]rune{

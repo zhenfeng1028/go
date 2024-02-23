@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	people := []struct {
 		Name string
 		Age  int
@@ -28,5 +27,4 @@ func main() {
 	// Sort by age preserving name order
 	sort.SliceStable(people, func(i, j int) bool { return people[i].Age < people[j].Age })
 	fmt.Println("By age,name:", people)
-
 }

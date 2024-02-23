@@ -25,7 +25,6 @@ func postScrape() {
 	}
 
 	doc.Find("tbody tr").Each(func(_ int, tr *goquery.Selection) {
-
 		e := Earthquake{}
 
 		tr.Find("td").Each(func(ix int, td *goquery.Selection) {
