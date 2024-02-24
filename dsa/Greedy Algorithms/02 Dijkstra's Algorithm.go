@@ -49,13 +49,12 @@ func (e *Edge) Connects(node1, node2 *Node) bool {
 // Find the node with the smallest distance,
 // remove it, and return it.
 func ExtractSmallest() *Node {
-	size := len(nodes)
-	if size == 0 {
+	if len(nodes) == 0 {
 		return nil
 	}
 	smallestPosition := 0
 	smallest := nodes[0]
-	for i := 1; i < size; i++ {
+	for i := 1; i < len(nodes); i++ {
 		current := nodes[i]
 		if current.distanceFromStart < smallest.distanceFromStart {
 			smallest = current
@@ -97,7 +96,7 @@ func Contains(node *Node) bool {
 
 // Return distance between two connected nodes
 func Distance(node1, node2 *Node) int {
-	for i := 0; i < len(nodes); i++ {
+	for i := 0; i < len(edges); i++ {
 		edge := edges[i]
 		if edge.Connects(node1, node2) {
 			return edge.distance
@@ -124,11 +123,11 @@ func Dijkstras() {
 }
 
 func PrintShortestRouteTo(destination *Node) {
-	previous := destination
+	current := destination
 	fmt.Println("Distance from start:", destination.distanceFromStart)
-	for previous != nil {
-		fmt.Printf("%c ", previous.id)
-		previous = previous.previous
+	for current != nil {
+		fmt.Printf("%c ", current.id)
+		current = current.previous
 	}
 	fmt.Println()
 }
