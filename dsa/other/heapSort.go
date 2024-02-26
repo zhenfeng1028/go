@@ -21,7 +21,7 @@ func main() {
 	h := &hp{sort.IntSlice{}}
 	for _, num := range nums {
 		heap.Push(h, num)
-		fmt.Println(*h)
+		fmt.Println(h.IntSlice)
 	}
 	for i := 0; i < len(nums); i++ {
 		x := heap.Pop(h).(int)

@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// There may be multiple longest common subsequences, but this solution only returns one
+
 func lcsAlgo(S1, S2 string) string {
 	m, n := len(S1), len(S2)
 	LCS_table := make([][]int, m+1)
