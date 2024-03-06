@@ -12,11 +12,12 @@ type Queue struct {
 }
 
 func NewQueue() *Queue {
-	q := &Queue{}
-	q.front = -1
-	q.rear = -1
-	q.items = make([]int, initSize)
-	return q
+	return &Queue{
+		front: -1,
+		rear:  -1,
+		size:  initSize,
+		items: make([]int, initSize),
+	}
 }
 
 func (q *Queue) IsFull() bool {
@@ -40,10 +41,9 @@ func (q *Queue) Enqueue(element int) {
 	}
 }
 
-func (q *Queue) Dequeue() int {
+func (q *Queue) Dequeue() {
 	if q.IsEmpty() {
 		fmt.Println("Empty Queue")
-		return -1
 	} else {
 		element := q.items[q.front]
 		if q.front >= q.rear {
@@ -53,7 +53,6 @@ func (q *Queue) Dequeue() int {
 			q.front++
 		}
 		fmt.Println("Deleted", element)
-		return element
 	}
 }
 

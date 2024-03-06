@@ -5,14 +5,19 @@ import "fmt"
 const initSize = 5
 
 type Deque struct {
-	arr   []int
+	items []int
 	front int
 	rear  int
 	size  int
 }
 
 func NewDeque() *Deque {
-	return &Deque{front: -1, rear: 0}
+	return &Deque{
+		front: -1,
+		rear:  0,
+		size:  initSize,
+		items: make([]int, initSize),
+	}
 }
 
 func (q *Deque) IsFull() bool {
@@ -38,7 +43,7 @@ func (q *Deque) InsertFront(key int) {
 		q.front = q.front - 1
 	}
 
-	q.arr[q.front] = key
+	q.items[q.front] = key
 }
 
 func (q *Deque) InsertRear(key int) {
@@ -56,7 +61,7 @@ func (q *Deque) InsertRear(key int) {
 		q.rear = q.rear + 1
 	}
 
-	q.arr[q.rear] = key
+	q.items[q.rear] = key
 }
 
 func (q *Deque) DeleteFront() {
@@ -96,7 +101,7 @@ func (q *Deque) GetFront() int {
 		fmt.Println("Underflow")
 		return -1
 	}
-	return q.arr[q.front]
+	return q.items[q.front]
 }
 
 func (q *Deque) GetRear() int {
@@ -104,7 +109,7 @@ func (q *Deque) GetRear() int {
 		fmt.Println("Underflow")
 		return -1
 	}
-	return q.arr[q.rear]
+	return q.items[q.rear]
 }
 
 func main() {
