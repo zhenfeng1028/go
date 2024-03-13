@@ -122,6 +122,7 @@ func deleteNode(last_ref **Node, item int) {
 
 		// make temp as the last node
 		*last_ref = temp
+		return
 	}
 
 	// travel to the node to be deleted

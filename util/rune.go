@@ -6,13 +6,13 @@ func main() {
 	s := "abc你好"
 	r := "123你好"
 	fmt.Println("len(s)=", len([]byte(s)), "len(r)=", len([]rune(r))) // len(s)= 9 len(r)= 5
-
+	fmt.Printf("%x %x %x %x %x %x\n", r[0], r[1], r[2], r[3], r[4], r[5])
 	for k, v := range r {
 		fmt.Println("k=", k, "v=", v)
 	}
 
 	for k, v := range []rune(r) {
-		fmt.Println("k2=", k, "v2=", v)
+		fmt.Printf("k2=%d v2=%d %x\n", k, v, v)
 	}
 }
 

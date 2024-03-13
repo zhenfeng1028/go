@@ -85,9 +85,10 @@ func deleteNode(head_ref **Node, del_node *Node) {
 	// if del_node is head node, point the head pointer to the next of del_node
 	if *head_ref == del_node {
 		*head_ref = del_node.next
+		return
 	}
 
-	// if del_node is not at the last node, point the prev of node next to del_node to the previous of del_node
+	// if del_node is not the last node, point the prev of node next to del_node to the previous of del_node
 	if del_node.next != nil {
 		del_node.next.prev = del_node.prev
 	}

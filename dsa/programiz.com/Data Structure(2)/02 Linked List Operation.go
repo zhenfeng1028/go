@@ -67,8 +67,8 @@ func deleteNode(head_ref **Node, key int) {
 	prev.next = temp.next
 }
 
-func searchNode(head_ref **Node, key int) bool {
-	current := *head_ref
+func searchNode(head *Node, key int) bool {
+	current := head
 	for current != nil {
 		if current.data == key {
 			return true
@@ -78,11 +78,11 @@ func searchNode(head_ref **Node, key int) bool {
 	return false
 }
 
-func sortLinkedList(head_ref **Node) {
-	current := *head_ref
+func sortLinkedList(head *Node) {
+	current := head
 	var index *Node
 	var temp int
-	if head_ref == nil {
+	if head == nil {
 		return
 	} else {
 		for current != nil {
@@ -121,18 +121,18 @@ func main() {
 	fmt.Print("Linked List: ")
 	printList(head)
 
-	deleteNode(&head, 3)
+	deleteNode(&head, 5)
 	fmt.Print("After deleting an element: ")
 	printList(head)
 
-	item_to_find := 3
-	if searchNode(&head, item_to_find) {
+	item_to_find := 5
+	if searchNode(head, item_to_find) {
 		fmt.Println(item_to_find, "is found")
 	} else {
 		fmt.Println(item_to_find, "is not found")
 	}
 
-	sortLinkedList(&head)
+	sortLinkedList(head)
 	fmt.Print("Sorted List: ")
 	printList(head)
 }
