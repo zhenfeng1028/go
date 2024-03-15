@@ -45,7 +45,7 @@ func main() {
 	// 3，on duplicate key update 语句也可以根据唯一键来判断当前插入的记录是否已存在。
 	// var sql = "insert into person(name,age,address) values('lizhenfeng',18,'Chenchun Road 2') on duplicate key update age = values(age), address = values(address);"
 
-	// 没有主键或唯一键字段值相同，即判断当前记录不存在，新插入一条。
+	// 没有主键或唯一键字段值不同，即判断当前记录不存在，新插入一条。
 	// var sql = "insert into person(name,age,address) values('lizhenfeng2',18,'Chenchun Road 2') on duplicate key update age = values(age), address = values(address);"
 
 	// 4，如果传递了主键，是可以修改唯一键字段内容的。

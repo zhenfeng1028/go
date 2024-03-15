@@ -54,7 +54,7 @@ func addEnd(last_ref **Node, data int) {
 	(*last_ref).next = newNode
 
 	// make newNode as the last node
-	(*last_ref) = newNode
+	*last_ref = newNode
 }
 
 // insert node after a specific node
@@ -137,22 +137,12 @@ func deleteNode(last_ref **Node, item int) {
 }
 
 func traverse(last *Node) {
-	if last == nil {
-		fmt.Println("The list is empty")
-		return
+	temp := last.next
+	for temp != last {
+		fmt.Print(temp.data, " ")
+		temp = temp.next
 	}
-
-	var p *Node
-	var i int
-	for p != last.next {
-		if i == 0 {
-			p = last.next
-			i++
-		}
-		fmt.Print(p.data, " ")
-		p = p.next
-	}
-	fmt.Println()
+	fmt.Println(last.data)
 }
 
 func main() {
