@@ -29,7 +29,7 @@ func DeferFunc4() (t int) {
 	defer func(i int) {
 		fmt.Println(i)
 		fmt.Println(t)
-	}(t)
+	}(t) // defer压栈会计算形参以实参入栈
 	t = 1
 	return 2
 }

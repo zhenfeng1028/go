@@ -6,3 +6,8 @@ test.go
 xxx.md
 output.txt
 /assets
+example
+example2
+*.pprof
+trace.out
+trace2

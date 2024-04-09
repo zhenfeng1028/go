@@ -7,7 +7,7 @@ type Test struct {
 }
 
 func (t *Test) Close() {
-	fmt.Println(t.name, " closed")
+	fmt.Println(t.name, "closed")
 }
 
 func main() {
@@ -19,3 +19,5 @@ func main() {
 
 // Close方法定义成结构体指针接收者，因此全部输出 c closed
 // 如果想输出 c b a 可以将指针接收者改成值接收者
+
+// 注意：Go 1.22 之后修复了该问题
