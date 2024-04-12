@@ -15,7 +15,7 @@ func main() {
 	params.Set("age", "18")
 	u, err := url.ParseRequestURI(apiUrl)
 	if err != nil {
-		fmt.Printf("parse url requestUrl failed, err: %v\n", err)
+		fmt.Printf("parse url failed, err: %v\n", err)
 	}
 	u.RawQuery = params.Encode()
 	fmt.Println(u.String())
