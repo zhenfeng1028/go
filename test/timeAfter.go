@@ -12,8 +12,8 @@ import (
 func main() {
 	go func() {
 		// 开启pprof，监听请求
-		if err := http.ListenAndServe(":6060", nil); err != nil { // 也可以写成 127.0.0.1:6060
-			fmt.Printf("start pprof failed on %s,err%v \n", "6060", err)
+		if err := http.ListenAndServe(":6060", nil); err != nil {
+			fmt.Printf("start pprof failed: %v\n", err)
 		}
 	}()
 
@@ -25,7 +25,7 @@ func main() {
 func test() {
 	var ms runtime.MemStats
 	runtime.ReadMemStats(&ms)
-	fmt.Println("before, have", runtime.NumGoroutine(), "goroutines,", ms.Alloc, "bytes allocated", ms.HeapObjects, "heap object")
+	fmt.Printf("before, have %d goroutines, %d bytes allocated, %d heap object\n", runtime.NumGoroutine(), ms.Alloc, ms.HeapObjects)
 
 	var i int32
 	ch := make(chan string)
@@ -38,7 +38,7 @@ func test() {
 				atomic.AddInt32(&i, 1)
 				ch <- fmt.Sprintf("%d", i)
 			case <-done:
-				fmt.Println("close channel")
+				fmt.Println("stop sending to channel")
 				return
 			}
 		}

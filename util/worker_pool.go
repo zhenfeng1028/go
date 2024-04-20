@@ -53,7 +53,7 @@ func main() {
 	}
 
 	end := time.Now()
-	fmt.Println("time elapsed: ", end.Sub(start))
+	fmt.Println("time elapsed:", end.Sub(start))
 }
 
 // Our running program shows the 5 jobs being executed by
@@ -71,5 +71,5 @@ func main() {
 	worker 1 finished job 2
 	worker 2 finished job 5
 	worker 3 finished job 4
-	time elapsed:  2.001251144s
+	time elapsed: 2.001251144s
 */
