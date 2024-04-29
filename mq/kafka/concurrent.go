@@ -33,9 +33,9 @@ type ConsumerConfig struct {
 }
 
 type KafkaConsumer struct {
-	consumerConfig     *ConsumerConfig
-	consumerGroup      []sarama.ConsumerGroup
-	bizConsumerHandler []*Consumer
+	consumerConfig *ConsumerConfig
+	consumerGroup  sarama.ConsumerGroup
+	consumerList   []*Consumer
 }
 
 func main() {
@@ -104,30 +104,23 @@ func NewKafkaConsumer(config *ConsumerConfig) (*KafkaConsumer, error) {
 	}
 	log.Infof("Got partition count: %d", partitionCount)
 
-	concurrentNum := partitionCount
-	consumerGroupList := []sarama.ConsumerGroup{}
-	handlerList := []*Consumer{}
-
+	consumerGroup, err := sarama.NewConsumerGroup(config.Brokers, config.GroupId, cc)
+	if err != nil {
+		log.Error(err)
+		return nil, err
+	}
 	c := &KafkaConsumer{
 		consumerConfig: config,
+		consumerGroup:  consumerGroup,
 	}
 
-	for i := 0; i < concurrentNum; i++ {
-		// 内部并行处理函数
+	for i := 0; i < partitionCount; i++ {
 		concurrentExcutor := NewConcurrentExcutor(config.ConcurrentNum, c.externalExcute)
-		consumerGroup, err := sarama.NewConsumerGroup(config.Brokers, config.GroupId, cc)
-		if err != nil {
-			log.Error(err)
-			return nil, err
-		}
-		consumerGroupList = append(consumerGroupList, consumerGroup)
 		bizConsumer := &Consumer{number: i, excutor: concurrentExcutor}
-		handlerList = append(handlerList, bizConsumer)
+		c.consumerList = append(c.consumerList, bizConsumer)
 	}
-	log.Infof("Successfully init %v consumer instances of consumer group %s", concurrentNum, config.GroupId)
 
-	c.consumerGroup = consumerGroupList
-	c.bizConsumerHandler = handlerList
+	log.Infof("Successfully init %v consumer instances of consumer group %s", partitionCount, config.GroupId)
 
 	return c, nil
 }
@@ -143,12 +136,12 @@ func (c *KafkaConsumer) externalExcute(ctx context.Context, msg MsgInfo) error {
 
 func (c *KafkaConsumer) Start(ctx context.Context) error {
 	wg := sync.WaitGroup{}
-	for i := 0; i < len(c.consumerGroup); i++ {
+	for i := 0; i < len(c.consumerList); i++ {
 		wg.Add(1)
 		go func(i int) {
 			defer wg.Done()
-			e := c.bizConsumerHandler[i].excutor
-			e.start()            // 执行消息
+			ce := c.consumerList[i].excutor
+			ce.start()           // 执行消息
 			err := c.Run(ctx, i) // 消费消息
 			if err != nil {
 				log.Error(err)
@@ -165,7 +158,7 @@ func (c *KafkaConsumer) Run(ctx context.Context, i int) error {
 		// `Consume` should be called inside an infinite loop, when a
 		// server-side rebalance happens, the consumer session will need to be
 		// recreated to get the new claims
-		if err := c.consumerGroup[i].Consume(ctx, c.consumerConfig.Topics, c.bizConsumerHandler[i]); err != nil {
+		if err := c.consumerGroup.Consume(ctx, c.consumerConfig.Topics, c.consumerList[i]); err != nil {
 			log.Error("Error from consumer:", err)
 			return err
 		}
@@ -178,7 +171,7 @@ func (c *KafkaConsumer) Run(ctx context.Context, i int) error {
 
 // Consumer represents a Sarama consumer group consumer
 type Consumer struct {
-	number  int // 表示第几个consumer实例
+	number  int // 表示第几个消费者实例
 	excutor *ConcurrentExcutor
 }
 

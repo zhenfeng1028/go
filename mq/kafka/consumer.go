@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"strings"
 
 	"github.com/IBM/sarama"
 	"github.com/qiniu/x/log"
@@ -29,7 +28,7 @@ func main() {
 
 	cc := ConsumerConfig{
 		KafkaClientConfig: kcc,
-		Topics:            "test-topic",
+		Topics:            []string{"test-topic"},
 		Group:             "test",
 	}
 	c, err := NewKafkaConsumer(cc)
@@ -41,7 +40,7 @@ func main() {
 		defer c.Close()
 		err := c.Run(ctx)
 		if err != nil {
-			log.Errorf("consumer stopped : %v", err)
+			log.Error("consumer stopped:", err)
 			return
 		}
 	}()
@@ -63,8 +62,8 @@ type KafkaClientConfig struct {
 
 type ConsumerConfig struct {
 	KafkaClientConfig
-	Topics string `json:"topics"`
-	Group  string `json:"group"`
+	Topics []string `json:"topics"`
+	Group  string   `json:"group"`
 }
 
 type Data interface{}
@@ -99,7 +98,7 @@ func NewKafkaConsumer(c ConsumerConfig) (Consumer, error) {
 
 	client, err := sarama.NewConsumerGroup(c.Brokers, c.Group, config)
 	if err != nil {
-		log.Error("Error create consumer group : ", c.Brokers, c.Group, config)
+		log.Error("Error create consumer group:", c.Brokers, c.Group, config)
 		return nil, err
 	}
 
@@ -121,13 +120,13 @@ func (c *KafkaConsumer) Consume() <-chan Data {
 }
 
 func (c *KafkaConsumer) Run(ctx context.Context) error {
-	log.Println("begin to run consumer , topics:", c.config.Topics)
+	log.Info("begin to run consumer, topics:", c.config.Topics)
 	for {
 		// `Consume` should be called inside an infinite loop, when a
 		// server-side rebalance happens, the consumer session will need to be
 		// recreated to get the new claims
-		if err := c.client.Consume(ctx, strings.Split(c.config.Topics, ","), c); err != nil {
-			log.Errorf("Error from consumer: %v", err)
+		if err := c.client.Consume(ctx, c.config.Topics, c); err != nil {
+			log.Error("Error from consumer:", err)
 			return err
 		}
 		// check if context was cancelled, signaling that the consumer should stop
