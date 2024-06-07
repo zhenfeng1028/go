@@ -2,32 +2,45 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"runtime"
 	"sync"
-	"sync/atomic"
 	"time"
 )
 
-var wg sync.WaitGroup
+var (
+	a, b, c int64
+	wg      sync.WaitGroup
+)
 
 func main() {
-	runtime.GOMAXPROCS(8)
+	runtime.GOMAXPROCS(2)
 	now := time.Now()
-	for range 10000 {
-		var a uint64
-		wg.Add(1)
-		go func() {
-			for range math.MaxInt16 {
-				atomic.AddUint64(&a, 1)
-			}
-			wg.Done()
-		}()
-	}
+	wg.Add(3)
+	go func() {
+		for range 1000000 {
+			a++
+		}
+		wg.Done()
+	}()
+
+	go func() {
+		for range 1000000 {
+			b++
+		}
+		wg.Done()
+	}()
+
+	go func() {
+		for range 1000000 {
+			c++
+		}
+		wg.Done()
+	}()
 	wg.Wait()
-	fmt.Println("time elapsed:", time.Since(now))
+	fmt.Println(a + b + c)
+	fmt.Println(time.Since(now))
 }
 
-// 1 CPU: 1.574640024s
-// 4 CPUs: 550.466936ms
-// 8 CPUs: 457.705519ms
+// 1 CPU: 4.9691ms
+// 2 CPUs: 3.7993ms
+// 3 CPUs: 2.1373ms
