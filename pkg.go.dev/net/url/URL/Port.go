@@ -11,13 +11,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	rel, err := u.Parse("/foo")
+	fmt.Println(u.Port())
+	u, err = url.Parse("https://example.org:8080")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(rel)
-	_, err = u.Parse(":foo")
-	if _, ok := err.(*url.Error); !ok {
-		log.Fatal(err)
-	}
+	fmt.Println(u.Port())
 }
