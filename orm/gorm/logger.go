@@ -64,11 +64,7 @@ var LogFormatter = func(values ...interface{}) (messages []interface{}) {
 					if t, ok := value.(time.Time); ok {
 						formattedValues = append(formattedValues, fmt.Sprintf("'%v'", t.Format("2006-01-02 15:04:05")))
 					} else if b, ok := value.([]byte); ok {
-						if str := string(b); true {
-							formattedValues = append(formattedValues, fmt.Sprintf("'%v'", str))
-						} else {
-							formattedValues = append(formattedValues, "'<binary>'")
-						}
+						formattedValues = append(formattedValues, fmt.Sprintf("'<binary>%v'", b))
 					} else if r, ok := value.(driver.Valuer); ok {
 						if value, err := r.Value(); err == nil && value != nil {
 							formattedValues = append(formattedValues, fmt.Sprintf("'%v'", value))
