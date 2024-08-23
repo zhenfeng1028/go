@@ -18,7 +18,7 @@ func main() {
 	_ = json.NewEncoder(os.Stdout).Encode(u1)
 
 	u2 := &MyUser{}
-	_ = json.NewDecoder(os.Stdout).Decode(u2)
+	_ = json.NewDecoder(os.Stdin).Decode(u2)
 	fmt.Println(u2)
 }
 
