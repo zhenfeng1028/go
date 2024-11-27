@@ -129,6 +129,12 @@ func getFieldByStruct(structName interface{}) ([]interface{}, error) {
 		return nil, errors.New("no struct")
 	}
 
+	t := v.Type()
+	if t.Kind() == reflect.Ptr {
+		v = v.Elem()
+		t = v.Type()
+	}
+
 	ret := make([]interface{}, 0)
 
 	for i := 0; i < v.NumField(); i++ {

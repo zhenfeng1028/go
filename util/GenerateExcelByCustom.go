@@ -17,7 +17,7 @@ type Person struct {
 }
 
 func main() {
-	list := []Person{{"aaa", 28, "male"}, {"bbb", 26, "female"}}
+	list := []*Person{{"aaa", 28, "male"}, {"bbb", 26, "female"}}
 
 	interfaceSlice := make([]interface{}, len(list))
 	for k, v := range list {
@@ -132,6 +132,12 @@ func getFieldByStruct(structName interface{}, requiredFields []interface{}) ([]i
 	v := reflect.ValueOf(structName)
 	if !v.IsValid() {
 		return nil, errors.New("no struct")
+	}
+
+	t := v.Type()
+	if t.Kind() == reflect.Ptr {
+		v = v.Elem()
+		t = v.Type()
 	}
 
 	prepare := make([]interface{}, 0)
