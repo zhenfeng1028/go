@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Client</title>
+</head>
+<body>
+  <h1>WebSocket Client</h1>
+  <button id="connectBtn">Connect</button>
+  <button id="sendBtn">Send Message</button>
+  <button id="disconnectBtn">Disconnect</button>
+  <p id="status">Disconnected</p>
+  <script>
+    let ws;
+
+    document.getElementById('connectBtn').addEventListener('click', function() {
+      ws = new WebSocket('ws://localhost:8080/ws');
+
+      ws.onopen = function() {
+        document.getElementById('status').innerText = 'Connected';
+      };
+
+      ws.onmessage = function(event) {
+        alert('Message from server: ' + event.data);
+      };
+
+      ws.onclose = function() {
+        document.getElementById('status').innerText = 'Disconnected';
+      };
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', function() {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send('Hello, server!');
+      } else {
+        alert('WebSocket is not connected.');
+      }
+    });
+
+    document.getElementById('disconnectBtn').addEventListener('click', function() {
+      if (ws) {
+        ws.close();
+      }
+    });
+  </script>
+</body>
+</html>
