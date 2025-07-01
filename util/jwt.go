@@ -22,6 +22,7 @@ func main() {
 func EncJwt(uid string) string {
 	key := []byte("jwt_key")
 
+	// 序列化时会对key排序
 	claims := jwt.MapClaims{
 		"userId": uid,
 		"exp":    time.Now().Add(time.Hour).Unix(),

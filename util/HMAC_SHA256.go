@@ -29,5 +29,5 @@ func main() {
 	hmacHex := hex.EncodeToString(dataHmac)
 	secretHex := hex.EncodeToString(secret)
 
-	fmt.Printf("HMAC_SHA256(key: %s, data: %s): %s", secretHex, string(data), hmacHex)
+	fmt.Printf("HMAC_SHA256(key: %s, data: %s): %s\n", secretHex, string(data), hmacHex)
 }
