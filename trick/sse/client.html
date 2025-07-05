@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>SSE Demo</title></head>
+<body>
+  <h1>Server-Sent Events</h1>
+  <div id="events"></div>
+
+  <script>
+    const eventSource = new EventSource("http://localhost:8080/events");
+    eventSource.onmessage = function(event) {
+      const log = document.getElementById("events");
+      log.innerHTML += `<p>${event.data}</p>`;
+    };
+  </script>
+</body>
+</html>
