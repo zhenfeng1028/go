@@ -12,7 +12,7 @@ var s string
 var b []byte
 
 //go:embed hello.txt
-var f embed.FS
+var f embed.FS // read-only
 
 func main() {
 	println(s)
