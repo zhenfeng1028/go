@@ -3,16 +3,10 @@ package main
 import (
 	"fmt"
 	"sort"
-	"strconv"
 	"time"
 )
 
-const (
-	Day_Format    = "20060102"
-	Hour_Format   = "2006010215"
-	Minute_Format = "200601021504"
-	Second_Format = "20060102150405"
-)
+const Minute_Format = "200601021504"
 
 func main() {
 	slice := []int{1, 15, 60, 120, 240}
@@ -31,27 +25,15 @@ func main() {
 }
 
 func GetMinute(t time.Time, step int) int {
-	hourLong, _ := strconv.Atoi(t.Format(Hour_Format))
-	day, _ := strconv.Atoi(t.Format(Day_Format))
-	hourShort := t.Hour()
-	minute := t.Minute()
+	if step <= 0 {
+		return 0
+	}
 	if step < 60 {
-		size := int(time.Hour / (time.Duration(step) * time.Minute))
-		for i := 0; i < size; i++ {
-			if minute < step*(i+1) {
-				return hourLong*100 + step*i
-			}
-		}
-	} else if step == 60 {
-		return hourLong * 100
-	} else {
+		return t.Year()*100000000 + int(t.Month())*1000000 + t.Day()*10000 + t.Hour()*100 + (t.Minute()/step)*step
+	}
+	if step%60 == 0 {
 		stepHour := step / 60
-		size := int((24 * time.Hour) / (time.Duration(step) * time.Minute))
-		for i := 0; i < size; i++ {
-			if hourShort < stepHour*(i+1) {
-				return (day*100 + stepHour*i) * 100
-			}
-		}
+		return t.Year()*100000000 + int(t.Month()*1000000) + t.Day()*10000 + (t.Hour()/stepHour)*stepHour*100
 	}
 	return 0
 }

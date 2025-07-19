@@ -7,14 +7,27 @@ import (
 	"github.com/qiniu/x/log"
 )
 
-/*
-	测试步骤：
-	1.进入kafka目录（/usr/local/Cellar/kafka/3.0.0）
-	2.在终端开启zookeeper：bin/zookeeper-server-start libexec/config/zookeeper.properties
-	3.在新的终端开启kafka：bin/kafka-server-start libexec/config/server.properties
-	4.执行consumer.go：go run consumer.go
-	5.在新的终端生产消息：bin/kafka-console-producer --topic test-topic --bootstrap-server localhost:9092
-	6.在执行该文件的终端可以看到生产的消息被消费了
+// 使用KRaft模式（无需Zookeeper）
+/* 创建docker-compose-kraft.yml文件，内容如下：
+version: '3'
+services:
+kafka:
+	image: bitnami/kafka:latest
+	ports:
+	- "9092:9092"
+	environment:
+	- KAFKA_ENABLE_KRAFT=yes
+	- KAFKA_CFG_PROCESS_ROLES=broker,controller
+	- KAFKA_CFG_NODE_ID=1
+	- KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+	- KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+	- KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+	- KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+	volumes:
+	- kafka_data:/bitnami
+volumes:  # 必须显式声明volumes
+kafka_data:
+	driver: local
 */
 
 func main() {
@@ -154,7 +167,7 @@ func (c *KafkaConsumer) ConsumeClaim(session sarama.ConsumerGroupSession, claim 
 	// The `ConsumeClaim` itself is called within a goroutine, see:
 	// https://github.com/IBM/sarama/blob/master/consumer_group.go#L27-L29
 	for message := range claim.Messages() {
-		log.Printf("Message claimed: value = %s, timestamp = %v, topic = %s", string(message.Value), message.Timestamp, message.Topic)
+		log.Printf("Message claimed: timestamp = %v, topic = %s", message.Timestamp, message.Topic)
 		c.ch <- message.Value
 		session.MarkMessage(message, "")
 	}
