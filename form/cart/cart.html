@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>简易购物车</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f2f2f2; }
+        input[type="text"], input[type="number"] { width: 100px; }
+        .remove-btn { color: red; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>添加商品</h2>
+    <form id="addForm">
+        商品ID: <input type="text" id="product_id" required>
+        名称: <input type="text" id="name" required>
+        数量: <input type="number" id="quantity" value="1" min="1" required>
+        价格(元): <input type="number" id="price" value="100" min="1" required>
+        <button type="submit">添加到购物车</button>
+    </form>
+
+    <h2>购物车</h2>
+    <table id="cartTable">
+        <thead>
+            <tr>
+                <th>商品ID</th>
+                <th>名称</th>
+                <th>数量</th>
+                <th>价格(元)</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p id="total"></p>
+
+    <script>
+        function fetchCart() {
+            fetch('/shopping_cart')
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.querySelector('#cartTable tbody');
+                    tbody.innerHTML = '';
+                    data.items.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${item.product_id}</td>
+                            <td>${item.name}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.price}</td>
+                            <td><span class="remove-btn" onclick="removeItem('${item.product_id}')">移除</span></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                    document.getElementById('total').textContent = '总价: ' + data.total + ' 元';
+                });
+        }
+
+        function removeItem(productId) {
+            fetch('/shopping_cart?product_id=' + encodeURIComponent(productId), {
+                method: 'DELETE'
+            }).then(() => fetchCart());
+        }
+
+        document.getElementById('addForm').onsubmit = function(e) {
+            e.preventDefault();
+            const item = {
+                product_id: document.getElementById('product_id').value,
+                name: document.getElementById('name').value,
+                quantity: parseInt(document.getElementById('quantity').value),
+                price: parseInt(document.getElementById('price').value)
+            };
+            fetch('/shopping_cart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            }).then(() => {
+                fetchCart();
+                this.reset();
+            });
+        };
+
+        fetchCart();
+    </script>
+</body>
+</html>
