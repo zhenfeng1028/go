@@ -3,12 +3,8 @@
 /vendor
 test.go
 *.db
-xxx.md
 output.txt
 /assets
-example
-example2
 *.pprof
 trace.out
-trace2
-test2.go
+makefile
